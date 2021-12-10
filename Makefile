@@ -6,7 +6,7 @@
 #    By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 15:00:41 by smagdela          #+#    #+#              #
-#    Updated: 2021/12/09 16:33:10 by smagdela         ###   ########.fr        #
+#    Updated: 2021/12/10 13:09:41 by smagdela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ BONUSOD	=	${BONUSD}objects/
 LIBFT	:=	${addprefix ${LIBFTD},libft.a}
 MLX		:=	${addprefix ${MLXD},libmlx_Linux.a}
 LIBS	:=	${LIBFT} ${MLX}
-SRCS	=	fractol.c
+SRCS	=	fractol.c ft_utils.c ft_draw.c
 BONUS 	=	
 OBJS	:=	${addprefix ${OBJD},${SRCS:.c=.o}}
 SRCS	:=	${addprefix ${SRCD},${SRCS}}
@@ -39,7 +39,7 @@ BONUS	:=	${addprefix ${BONUSSD},${BONUS}}
 
 CC	=	clang
 CFLAGS	=	-Wall -Wextra -Werror
-MLXFLAGS	=	-lX11 -lXext
+MLXFLAGS	=	-lX11 -lXext -lm
 LIBSMK	=	make -C
 
 ##################
