@@ -6,10 +6,9 @@
 #    By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 15:00:41 by smagdela          #+#    #+#              #
-#    Updated: 2021/12/10 13:09:41 by smagdela         ###   ########.fr        #
+#    Updated: 2021/12/10 17:55:44 by smagdela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
 
 #################
 #	VARIABLES	#
@@ -39,12 +38,12 @@ BONUS	:=	${addprefix ${BONUSSD},${BONUS}}
 
 CC	=	clang
 CFLAGS	=	-Wall -Wextra -Werror
-MLXFLAGS	=	-lX11 -lXext -lm
+MLXFLAGS	=	-lX11 -lXext -lm -lz
 LIBSMK	=	make -C
 
-##################
-#	FANCY STUFF	 #
-##################
+###################
+#	FANCY STUFF   #
+###################
 
 GREEN	=	\033[0;32m
 RED		=	\033[1;31m
