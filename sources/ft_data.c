@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utils.c                                         :+:      :+:    :+:   */
+/*   ft_data.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 10:30:00 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/13 15:21:33 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/13 15:53:19 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,8 @@ void free_n_destroy(t_image *image, t_display *display)
 		image = NULL;
 	}
 	if (display && display->win_ptr)
-		mlx_destroy_window(display->mlx_ptr, display->win_ptr);
-	if (display)
 	{
-		free(display->win_ptr);
+		mlx_destroy_window(display->mlx_ptr, display->win_ptr);
 		display->win_ptr = NULL;
 	}
 	if (display && display->mlx_ptr)
@@ -74,7 +72,25 @@ t_image	*init_image(t_display *display)
 	return (image);
 }
 
-int8_t	ft_mean(int8_t a, int8_t b)
+t_display	*init_display(char *win_name)
 {
-	return ((a + b) / 2);
+	t_display	*display;
+
+	display = malloc(sizeof(t_display));
+	if (display == NULL)
+		ft_error("malloc");
+	display->mlx_ptr = mlx_init();
+	if (display->mlx_ptr == NULL)
+	{
+		free(display);
+		ft_error("mlx_init");
+	}
+	display->win_ptr = mlx_new_window(display->mlx_ptr,
+		WIN_WIDTH, WIN_HEIGHT, win_name);
+	if (display->win_ptr == NULL)
+	{
+		free_n_destroy(NULL, display);
+		ft_error("mlx_new_window");
+	}
+	return (display);
 }

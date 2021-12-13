@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 15:24:29 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/13 15:19:22 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/13 15:52:04 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 
 typedef int8_t	t_bool;
 
+/* Data structures for mlx */
 typedef struct s_display {
 	void	*mlx_ptr;
 	void	*win_ptr;
@@ -45,6 +46,7 @@ typedef struct s_image {
 	int			endian;
 }	t_image;
 
+/* Geometry structures */
 typedef struct s_circle {
 	int		x_c;
 	int		y_c;
@@ -52,13 +54,20 @@ typedef struct s_circle {
 	int		color;
 }	t_circle;
 
+/* Data initialisation and destruction for mlx */
 void		ft_error(const char* ft_name);
-int			draw_pixel(t_image *image, int x, int y, int color);
-int			draw_pixel_fusion(t_image *image, int x, int y, int color);
-int			draw_circle(t_image *image, t_circle *circle);
-t_circle	*build_circle(int x, int y, double r, int color);
 void 		free_n_destroy(t_image *image, t_display *display);
-int8_t		ft_mean(int8_t a, int8_t b);
 t_image		*init_image(t_display *display);
+t_display	*init_display(char *win_name);
+
+/* Geometry drawing functions */
+int			draw_pixel_fusion(t_image *image, int x, int y, int color);
+int			draw_pixel(t_image *image, int x, int y, int color);
+t_circle	*build_circle(int x, int y, double r, int color);
+int			draw_circle(t_image *image, t_circle *circle);
+
+/* Events handling functions */
+int			loop_handler(t_image *image);
+int			keys_handler(int key_sym, t_image *image);
 
 #endif
