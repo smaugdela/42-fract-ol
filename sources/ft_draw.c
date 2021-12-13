@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 12:56:01 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/13 15:53:18 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/13 17:32:22 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int draw_pixel_fusion(t_image *image, int x, int y, int color)
 }
 */
 
-int draw_pixel(t_image *image, int x, int y, int color)
+int	draw_pixel(t_image *image, int x, int y, int color)
 {
 	char	*pixel;
 	int		i;
@@ -57,17 +57,17 @@ int draw_pixel(t_image *image, int x, int y, int color)
 
 t_circle	*build_circle(int x, int y, double r, int color)
 {
-    t_circle    *circle;
+	t_circle	*circle;
 
 	circle = NULL;
 	circle = malloc(1 * sizeof(t_circle));
 	if (circle == NULL)
 		return (NULL);
-    circle->x_c = x;
-    circle->y_c = y;
-    circle->r = r;
-    circle->color = color;
-    return (circle);
+	circle->x_c = x;
+	circle->y_c = y;
+	circle->r = r;
+	circle->color = color;
+	return (circle);
 }
 
 int	draw_circle(t_image *image, t_circle *circle)
@@ -87,7 +87,7 @@ int	draw_circle(t_image *image, t_circle *circle)
 		while (++j < WIN_HEIGHT)
 		{
 			if (sqrt(pow(circle->x_c - i, 2) + pow(circle->y_c - j, 2))
-                <= circle->r)
+				<= circle->r)
 				draw_pixel(image, i, j, circle->color);
 		}
 	}

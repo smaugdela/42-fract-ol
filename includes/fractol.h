@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 15:24:29 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/13 15:52:04 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/13 18:51:25 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ typedef struct s_circle {
 }	t_circle;
 
 /* Data initialisation and destruction for mlx */
-void		ft_error(const char* ft_name);
-void 		free_n_destroy(t_image *image, t_display *display);
+void		ft_error(const char *ft_name);
+void		free_n_destroy(t_image *image, t_display *display);
 t_image		*init_image(t_display *display);
 t_display	*init_display(char *win_name);
 
@@ -69,5 +69,6 @@ int			draw_circle(t_image *image, t_circle *circle);
 /* Events handling functions */
 int			loop_handler(t_image *image);
 int			keys_handler(int key_sym, t_image *image);
+int			mouse_handler(XButtonPressedEvent *info, t_image *image);
 
 #endif
