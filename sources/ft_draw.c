@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 12:56:01 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/10 18:25:06 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/13 15:22:05 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	draw_circle(t_image *image, t_circle *circle)
 
 	if (circle == NULL)
 	{
-		destroy_n_free(image, image->display);
+		free_n_destroy(image, image->display);
 		ft_error("malloc");
 	}
 	i = -1;

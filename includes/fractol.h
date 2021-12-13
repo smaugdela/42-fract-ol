@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 15:24:29 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/10 18:19:34 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/13 15:19:22 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ int			draw_pixel(t_image *image, int x, int y, int color);
 int			draw_pixel_fusion(t_image *image, int x, int y, int color);
 int			draw_circle(t_image *image, t_circle *circle);
 t_circle	*build_circle(int x, int y, double r, int color);
-void 		destroy_n_free(t_image *image, t_display *display);
+void 		free_n_destroy(t_image *image, t_display *display);
 int8_t		ft_mean(int8_t a, int8_t b);
+t_image		*init_image(t_display *display);
 
 #endif
