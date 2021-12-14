@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 10:30:00 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/14 12:27:34 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/14 15:53:08 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,6 @@ t_display	*init_display(char *win_name)
 		free_n_destroy(NULL, display);
 		ft_error("mlx_new_window");
 	}
+	display->drawing = FALSE;
 	return (display);
 }

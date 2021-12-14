@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:45:38 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/14 14:00:03 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/14 16:09:34 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,22 +60,21 @@ int	keys_rev_handler(int key_sym, t_image *image)
 	return (0);
 }
 
-int	mouse_handler(int button, int x, int y, t_image *image)
+int	pointer_handler(int x, int y, t_image *image)
 {
-	if (x >= 0 && x <= WIN_WIDTH && y >= 0 && y <= WIN_HEIGHT)
+	if (x >= 0 && x <= WIN_WIDTH && y >= 0 && y <= WIN_HEIGHT &&
+		image->display->drawing == TRUE)
 	{
 		ft_putstr_fd("Mouse coordinates = (", 1);
 		ft_putnbr_fd(x, 1);
 		ft_putstr_fd(", ", 1);
 		ft_putnbr_fd(y, 1);
 		ft_putstr_fd(")\n", 1);
-	}
-	if (button == 1)
-	{
-		draw_circle(image, build_circle(x, y, 50, 0xffffff));
+		draw_pixel(image, x, y, 0xff1080);
 		mlx_put_image_to_window(image->display->mlx_ptr,
 			image->display->win_ptr, image->image_ptr, 0, 0);
 	}
+	(void)image;
 	return (0);
 }
 /*
@@ -86,12 +85,23 @@ Button value:
 	molette /\ = 4
 	molette \/ = 5
 */
-
-int	mouse_rev_handler(int button, int x, int y, t_image *image)
+int button_handler(int button, int x, int y, t_image *image)
 {
 	(void)x;
 	(void)y;
 	if (button == 1)
+		image->display->drawing = TRUE;
+	return (0);
+}
+
+int	button_rev_handler(int button, int x, int y, t_image *image)
+{
+	(void)x;
+	(void)y;
+	if (button == 1)
+	{	
+		image->display->drawing = FALSE;
 		clear_window(image, 0);
+	}
 	return (0);
 }
