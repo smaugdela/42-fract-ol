@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 12:56:01 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/13 17:32:22 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/14 10:10:00 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,14 @@ int draw_pixel_fusion(t_image *image, int x, int y, int color)
 	return (0);
 }
 */
+
+int	get_pixel_color(int x, int y, t_image *image)
+{
+	char	*pixel;
+
+	pixel = image->addr + (y * image->size_line + x * (image->bpp / 8));
+	return (*(int *)pixel);
+}
 
 int	draw_pixel(t_image *image, int x, int y, int color)
 {

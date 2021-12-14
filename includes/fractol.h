@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 15:24:29 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/13 18:51:25 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/14 10:52:54 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ t_image		*init_image(t_display *display);
 t_display	*init_display(char *win_name);
 
 /* Geometry drawing functions */
+int			get_pixel_color(int x, int y, t_image *image);
 int			draw_pixel_fusion(t_image *image, int x, int y, int color);
 int			draw_pixel(t_image *image, int x, int y, int color);
 t_circle	*build_circle(int x, int y, double r, int color);
@@ -69,6 +70,7 @@ int			draw_circle(t_image *image, t_circle *circle);
 /* Events handling functions */
 int			loop_handler(t_image *image);
 int			keys_handler(int key_sym, t_image *image);
-int			mouse_handler(XButtonPressedEvent *info, t_image *image);
+int			mouse_handler(int button, int x, int y, t_image *image);
+int			pointer_handler(int x, int y, t_image *image);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 16:27:37 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/13 18:48:17 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/14 10:54:40 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	main(void)
 	image = init_image(display);
 	mlx_loop_hook(display->mlx_ptr, &loop_handler, image);
 	mlx_hook(display->win_ptr, KeyPress, KeyPressMask, &keys_handler, image);
-	mlx_hook(display->win_ptr, MotionNotify, ButtonMotionMask, &mouse_handler, image);
+	mlx_hook(display->win_ptr, MotionNotify, PointerMotionMask, &pointer_handler, image);
+	mlx_mouse_hook(display->win_ptr, &mouse_handler, image);
 	mlx_loop(display->mlx_ptr);
 	free_n_destroy(image, display);
 	ft_putstr_fd("Stopping...\nThanks for using fract'ol!\n", 1);
