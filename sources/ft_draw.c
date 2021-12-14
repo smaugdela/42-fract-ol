@@ -6,34 +6,11 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 12:56:01 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/14 10:10:00 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/14 12:27:31 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-/*
-Not Working
-int draw_pixel_fusion(t_image *image, int x, int y, int color)
-{
-	char	*pixel;
-	int		i;
-
-	pixel = image->addr + (y * image->size_line + x * (image->bpp / 8));
-	color = mlx_get_color_value(image->display->mlx_ptr, color);
-	i = image->bpp;
-	while (i >= 8)
-	{
-		i -= 8;
-		if (image->endian == 1)
-			*pixel = ft_mean((color >> i) & 255, *pixel);
-		else
-			*pixel = ft_mean((color >> (image->bpp - i - 8)) & 255, *pixel);
-		++pixel;
-	}
-	return (0);
-}
-*/
 
 int	get_pixel_color(int x, int y, t_image *image)
 {
@@ -88,10 +65,10 @@ int	draw_circle(t_image *image, t_circle *circle)
 		free_n_destroy(image, image->display);
 		ft_error("malloc");
 	}
-	i = -1;
+	i = circle->x_c - circle->r - 1;
 	while (++i < WIN_WIDTH)
 	{
-		j = -1;
+		j = circle->y_c - circle->r - 1;
 		while (++j < WIN_HEIGHT)
 		{
 			if (sqrt(pow(circle->x_c - i, 2) + pow(circle->y_c - j, 2))
@@ -100,5 +77,25 @@ int	draw_circle(t_image *image, t_circle *circle)
 		}
 	}
 	free(circle);
+	return (0);
+}
+
+int	clear_window(t_image *image, int color)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i < WIN_WIDTH)
+	{
+		j = -1;
+		while (++j < WIN_HEIGHT)
+		{
+			if (get_pixel_color(i, j, image) > 0)
+				draw_pixel(image, i, j, color);
+		}
+	}
+	mlx_put_image_to_window(image->display->mlx_ptr,
+		image->display->win_ptr, image->image_ptr, 0, 0);
 	return (0);
 }
