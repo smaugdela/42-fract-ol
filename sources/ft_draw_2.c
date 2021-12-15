@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 09:23:31 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/15 16:22:00 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/15 18:34:17 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,15 @@ int	color_monochrome(int n, char color)
 
 int	color_continuous(float nu)
 {
-	uint8_t	color_bytes[4];
+	unsigned char	color_bytes[4];
 	int				color;
+	float			freq;
 
-	color_bytes[0] = (uint8_t)255;
-	color_bytes[1] = (uint8_t)((sin(0.1 * nu + 0) + 1) * 127.5);
-	color_bytes[2] = (uint8_t)((sin(0.1 * nu + 3.14 / 2) + 1) * 127.5);
-	color_bytes[3] = (uint8_t)((sin(0.1 * nu + 3.14) + 1) * 127.5);
+	freq = 0.008;
+	color_bytes[0] = (unsigned char)255;
+	color_bytes[1] = (unsigned char)((sin(freq * nu + 3.14 / 2) + 1) * 127.5);
+	color_bytes[2] = (unsigned char)((sin(freq * nu + 3.14) + 1) * 127.5);
+	color_bytes[3] = (unsigned char)((sin(freq * nu + 0) + 1) * 127.5);
 	color = 0;
 	color = color | color_bytes[0] << 24;
 	color = color | color_bytes[1] << 16;

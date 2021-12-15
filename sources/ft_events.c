@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:45:38 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/14 16:09:34 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/15 18:34:40 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,19 +62,19 @@ int	keys_rev_handler(int key_sym, t_image *image)
 
 int	pointer_handler(int x, int y, t_image *image)
 {
-	if (x >= 0 && x <= WIN_WIDTH && y >= 0 && y <= WIN_HEIGHT &&
-		image->display->drawing == TRUE)
+	if (x >= 0 && x <= WIN_WIDTH && y >= 0 && y <= WIN_HEIGHT)
 	{
 		ft_putstr_fd("Mouse coordinates = (", 1);
 		ft_putnbr_fd(x, 1);
 		ft_putstr_fd(", ", 1);
 		ft_putnbr_fd(y, 1);
 		ft_putstr_fd(")\n", 1);
-		draw_pixel(image, x, y, 0xff1080);
+		image->fractal.param.re = x;
+		image->fractal.param.im = y;
+		draw_julia(image, image->fractal);
 		mlx_put_image_to_window(image->display->mlx_ptr,
 			image->display->win_ptr, image->image_ptr, 0, 0);
 	}
-	(void)image;
 	return (0);
 }
 /*
@@ -90,7 +90,8 @@ int button_handler(int button, int x, int y, t_image *image)
 	(void)x;
 	(void)y;
 	if (button == 1)
-		image->display->drawing = TRUE;
+		mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
+			x, y, 0xffff00, "Click!");
 	return (0);
 }
 
@@ -99,9 +100,7 @@ int	button_rev_handler(int button, int x, int y, t_image *image)
 	(void)x;
 	(void)y;
 	if (button == 1)
-	{	
-		image->display->drawing = FALSE;
-		clear_window(image, 0);
-	}
+		mlx_put_image_to_window(image->display->mlx_ptr,
+			image->display->win_ptr, image->image_ptr, 0, 0);
 	return (0);
 }
