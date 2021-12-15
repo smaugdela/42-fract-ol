@@ -6,7 +6,7 @@
 #    By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 15:00:41 by smagdela          #+#    #+#              #
-#    Updated: 2021/12/14 17:57:49 by smagdela         ###   ########.fr        #
+#    Updated: 2021/12/15 12:22:17 by smagdela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,9 +29,10 @@ BONUSOD	=	${BONUSD}objects/
 LIBFT	:=	${addprefix ${LIBFTD},libft.a}
 MLX		:=	${addprefix ${MLXD},libmlx_Linux.a}
 LIBS	:=	${LIBFT} ${MLX}
-SRCS	=	fractol.c ft_data.c ft_draw.c ft_events.c ft_events_2.c mandelbrot.c
+SRCS	=	fractol.c ft_data.c ft_draw.c ft_draw_2.c ft_events.c ft_events_2.c mandelbrot.c
 BONUS 	=	
 OBJS	:=	${addprefix ${OBJD},${SRCS:.c=.o}}
+DEPS	:=	${addprefix ${OBJD},${SRCS:.c=.d}}
 SRCS	:=	${addprefix ${SRCD},${SRCS}}
 BONUSO	:=	${addprefix ${BONUSOD},${BONUS:.c=.o}}
 BONUS	:=	${addprefix ${BONUSSD},${BONUS}}
@@ -64,7 +65,7 @@ ${NAME}:	${LIBS} ${OBJS}
 
 ${OBJD}%.o:	${SRCD}%.c
 	mkdir -p ${OBJD}
-	${CC} ${CFLAGS} -c -o $@ -I${INCD} -I${LIBFTD} -I${MLXD} $<
+	${CC} ${CFLAGS} -c -o $@ -I${INCD} -I${LIBFTD} -I${MLXD} -MMD $<
 
 ${LIBS}:
 	${LIBSMK} ${LIBFTD} bonus
@@ -79,7 +80,7 @@ ${BONUSOD}%.o:	${BONUSSD}%.c
 	${CC} ${CFLAGS} -c -o $@ -I${INCD} -I${LIBFTD} -I${MLXD} $<
 
 clean:
-	-rm -rf ${OBJD} ${BONUSOD}
+	-rm -rf ${OBJD} ${BONUSOD} ${DEPD}
 	${LIBSMK} ${LIBFTD} clean
 	${LIBSMK} ${MLXD} clean
 
@@ -95,3 +96,5 @@ norm:
 	norminette ${SRCS} ${BONUS} ${INCD}*.h ${LIBFTD}*.c ${LIBFTD}*.h
 
 .PHONY : re all bonus clean fclean norm
+
+-include ${DEPS}

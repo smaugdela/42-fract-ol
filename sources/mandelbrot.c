@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 16:13:59 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/14 17:58:11 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/15 10:44:34 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	draw_fractal(t_image *image, t_fractal fractal)
 			if (n >= MAX_ITER)
 				draw_pixel(image, x, y, 0);
 			else
-				draw_pixel(image, x, y, 0xff00ff + 0x00ff00 * n / MAX_ITER);
+				draw_pixel(image, x, y, color_monochrome(n, 'G'));
 		}
 	}
 	mlx_put_image_to_window(image->display->mlx_ptr,

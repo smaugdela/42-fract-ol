@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 16:27:37 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/14 17:58:22 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/15 10:44:36 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ int	main(void)
 	init_events(display, image);
 
 	mandelbrot.ft_fractal = &ft_mandelbrot;
-	mandelbrot.max_im = 1;
-	mandelbrot.min_im = -1;
-	mandelbrot.max_re = 1;
-	mandelbrot.min_re = -2;
+	mandelbrot.max_im = 1.1;
+	mandelbrot.min_im = -1.1;
+	mandelbrot.max_re = 0.01;
+	mandelbrot.min_re = -3.5;
 	draw_fractal(image, mandelbrot);
-	
+
 	mlx_loop(display->mlx_ptr);
 	free_n_destroy(image, display);
 	ft_putstr_fd("\nStopping...\nThanks for using fract'ol!\n", 1);
