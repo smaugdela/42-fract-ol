@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 15:24:29 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/15 12:23:54 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/15 16:17:33 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define TRUE	1
 # define FALSE	0
 
-# define MAX_ITER	20
+# define MAX_ITER	30
 
 typedef int8_t	t_bool;
 
@@ -64,7 +64,7 @@ typedef struct s_complex {
 }	t_complex;
 
 typedef	struct s_fractal {
-	int		(*ft_fractal)(t_complex);
+	float	(*ft_fractal)(t_complex);
 	float	max_re;
 	float	max_im;
 	float	min_re;
@@ -79,8 +79,8 @@ t_display	*init_display(char *win_name);
 
 /* Geometry drawing functions */
 int			get_pixel_color(int x, int y, t_image *image);
-int			color_revert(int color);
 int			color_monochrome(int n, char color);
+int			color_continuous(float nu);
 int			draw_pixel(t_image *image, int x, int y, int color);
 int			clear_window(t_image *image, int color);
 t_circle	*build_circle(int x, int y, double r, int color);
@@ -97,6 +97,7 @@ int			button_rev_handler(int button, int x, int y, t_image *image);
 int			red_cross_handler(t_image *image);
 
 /* Fractals definitions */
-int			ft_mandelbrot(t_complex c);
+float		ft_mandelbrot(t_complex c);
+float		complex_magnitude(t_complex z);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 09:23:31 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/15 10:41:26 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/15 16:22:00 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,19 @@ int	color_monochrome(int n, char color)
 		return ((0x00ffffff * n / MAX_ITER) & 0x00ffffff);
 }
 
-int	color_revert(int color)
+int	color_continuous(float nu)
 {
-	return ((~ color) & 0x00ffffff);
+	uint8_t	color_bytes[4];
+	int				color;
+
+	color_bytes[0] = (uint8_t)255;
+	color_bytes[1] = (uint8_t)((sin(0.1 * nu + 0) + 1) * 127.5);
+	color_bytes[2] = (uint8_t)((sin(0.1 * nu + 3.14 / 2) + 1) * 127.5);
+	color_bytes[3] = (uint8_t)((sin(0.1 * nu + 3.14) + 1) * 127.5);
+	color = 0;
+	color = color | color_bytes[0] << 24;
+	color = color | color_bytes[1] << 16;
+	color = color | color_bytes[2] << 8;
+	color = color | color_bytes[3];
+	return (color);
 }

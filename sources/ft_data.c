@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 10:30:00 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/14 15:53:08 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/15 15:08:39 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,4 +95,9 @@ t_display	*init_display(char *win_name)
 	}
 	display->drawing = FALSE;
 	return (display);
+}
+
+float	complex_magnitude(t_complex z)
+{
+	return (sqrt(pow(z.re, 2) + pow(z.im, 2)));
 }
