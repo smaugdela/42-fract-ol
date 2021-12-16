@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 16:27:37 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/15 18:35:42 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/16 14:46:18 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ static int	init_events(t_display *display, t_image *image)
 		&keys_rev_handler, image);
 	mlx_hook(display->win_ptr, DestroyNotify, StructureNotifyMask,
 		&red_cross_handler, image);
-	mlx_hook(display->win_ptr, MotionNotify, PointerMotionMask,
-		&pointer_handler, image);
 	mlx_hook(display->win_ptr, ButtonPress, ButtonPressMask,
 		&button_handler, image);
 	mlx_hook(display->win_ptr, ButtonRelease, ButtonReleaseMask,
 		&button_rev_handler, image);
+	mlx_hook(display->win_ptr, MotionNotify, PointerMotionMask,
+		&pointer_handler, image);
 	return (0);
 }
 
@@ -48,7 +48,7 @@ int	main(void)
 	mandelbrot.min_re = -3.5;
 	mandelbrot.param = param;
 	draw_mandelbrot(image, mandelbrot);
-*/
+
 	julia.max_im = 1;
 	julia.min_im = -1;
 	julia.max_re = 1;
@@ -56,7 +56,7 @@ int	main(void)
 	julia.param = param;
 	draw_julia(image, julia);
 	image->fractal = julia;
-
+*/
 	mlx_loop(display->mlx_ptr);
 	free_n_destroy(image, display);
 	ft_putstr_fd("\nStopping...\nThanks for using fract'ol!\n", 1);

@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 12:56:01 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/15 10:39:23 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/16 15:07:53 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,26 @@ int	draw_pixel(t_image *image, int x, int y, int color)
 			*pixel = (color >> (image->bpp - i - 8)) & 255;
 		++pixel;
 	}
+	return (0);
+}
+
+int	clear_window(t_image *image, int color)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i < WIN_WIDTH)
+	{
+		j = -1;
+		while (++j < WIN_HEIGHT)
+		{
+			if (get_pixel_color(i, j, image) > 0)
+				draw_pixel(image, i, j, color);
+		}
+	}
+	mlx_put_image_to_window(image->display->mlx_ptr,
+		image->display->win_ptr, image->image_ptr, 0, 0);
 	return (0);
 }
 
@@ -77,25 +97,5 @@ int	draw_circle(t_image *image, t_circle *circle)
 		}
 	}
 	free(circle);
-	return (0);
-}
-
-int	clear_window(t_image *image, int color)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (++i < WIN_WIDTH)
-	{
-		j = -1;
-		while (++j < WIN_HEIGHT)
-		{
-			if (get_pixel_color(i, j, image) > 0)
-				draw_pixel(image, i, j, color);
-		}
-	}
-	mlx_put_image_to_window(image->display->mlx_ptr,
-		image->display->win_ptr, image->image_ptr, 0, 0);
 	return (0);
 }
