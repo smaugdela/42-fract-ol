@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 15:24:29 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/16 15:07:04 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/16 16:00:36 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define TRUE	1
 # define FALSE	0
 
-# define MAX_ITER	5
+# define MAX_ITER	10
 
 typedef int8_t	t_bool;
 
@@ -81,24 +81,11 @@ typedef struct s_rectangle {
 	t_bool	border_only;
 }	t_rectangle;
 
-
 /* Data initialisation and destruction for mlx */
 void		ft_error(const char *ft_name);
 void		free_n_destroy(t_image *image, t_display *display);
 t_image		*init_image(t_display *display);
 t_display	*init_display(char *win_name);
-
-/* Geometry drawing functions */
-int			get_pixel_color(int x, int y, t_image *image);
-int			color_monochrome(int n, char color);
-int			draw_pixel(t_image *image, int x, int y, int color);
-int			clear_window(t_image *image, int color);
-t_circle	*build_circle(int x, int y, double r, int color);
-int			draw_circle(t_image *image, t_circle *circle);
-t_circle	*build_rectangle(int x, int y, double r, int color);
-int			draw_rectangle(t_image *image, t_rectangle *rectangle);
-void		draw_mandelbrot(t_image *image, t_fractal fractal);
-void		draw_julia(t_image *image, t_fractal fractal);
 
 /* Events handling functions */
 int			loop_handler(t_image *image);
@@ -108,6 +95,18 @@ int			pointer_handler(int x, int y, t_image *image);
 int			button_handler(int button, int x, int y, t_image *image);
 int			button_rev_handler(int button, int x, int y, t_image *image);
 int			red_cross_handler(t_image *image);
+
+/* Drawing functions */
+int			draw_pixel(t_image *image, int x, int y, int color);
+int			clear_window(t_image *image, int color);
+t_circle	*build_circle(int x, int y, double r, int color);
+int			draw_circle(t_image *image, t_circle *circle);
+t_circle	*build_rectangle(int x, int y, double r, int color);
+int			draw_rectangle(t_image *image, t_rectangle *rectangle);
+
+/* Colouring functions */
+int			get_pixel_color(int x, int y, t_image *image);
+int			color_monochrome(int n, char color);
 
 /* Fractals definitions */
 float		complex_magnitude(t_complex z);

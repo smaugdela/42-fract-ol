@@ -6,19 +6,11 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 12:56:01 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/16 15:07:53 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/16 16:00:33 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-int	get_pixel_color(int x, int y, t_image *image)
-{
-	char	*pixel;
-
-	pixel = image->addr + (y * image->size_line + x * (image->bpp / 8));
-	return (*(int *)pixel);
-}
 
 int	draw_pixel(t_image *image, int x, int y, int color)
 {
@@ -58,6 +50,16 @@ int	clear_window(t_image *image, int color)
 	mlx_put_image_to_window(image->display->mlx_ptr,
 		image->display->win_ptr, image->image_ptr, 0, 0);
 	return (0);
+}
+
+int	draw_ui(t_image *image)
+{
+	int	color;
+
+	color = get_pixel_color(WIN_WIDTH - 10, WIN_HEIGHT - 10, image);
+	color = 
+	mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
+		x - 20, y - 20, color, "H for help");
 }
 
 t_circle	*build_circle(int x, int y, double r, int color)

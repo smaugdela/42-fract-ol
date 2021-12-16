@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 16:27:37 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/16 14:46:18 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/16 16:00:37 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,15 @@ int	main(void)
 	init_events(display, image);
 	param.re = 0;
 	param.im = 0;
-/*
+
 	mandelbrot.max_im = 1.1;
 	mandelbrot.min_im = -1.1;
 	mandelbrot.max_re = 0.01;
 	mandelbrot.min_re = -3.5;
 	mandelbrot.param = param;
 	draw_mandelbrot(image, mandelbrot);
-
+	draw_ui(image);
+/*
 	julia.max_im = 1;
 	julia.min_im = -1;
 	julia.max_re = 1;
