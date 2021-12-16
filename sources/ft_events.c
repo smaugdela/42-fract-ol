@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:45:38 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/16 16:00:32 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/16 18:52:55 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,12 @@
 
 int	loop_handler(t_image *image)
 {	
-	(void)image;
+	if (image->fractal.render == TRUE)
+	{
+		mlx_put_image_to_window(image->display->mlx_ptr,
+			image->display->win_ptr, image->image_ptr, 0, 0);
+		image->fractal.render = FALSE;
+	}
 	return (0);
 }
 
@@ -30,9 +35,8 @@ int	keys_handler(int key_sym, t_image *image)
 	{
 		/* Ici il faut afficher le UI d'aide (afficher les differentes touches, les parametres de fractale, etc...) */
 		ft_putchar_fd((char)key_sym, 1);
+		image->fractal.render = TRUE;
 	}
-	mlx_put_image_to_window(image->display->mlx_ptr,
-		image->display->win_ptr, image->image_ptr, 0, 0);
 	return (0);
 }
 
@@ -42,10 +46,11 @@ int	keys_rev_handler(int key_sym, t_image *image)
 
 	color = 0;
 	if (key_sym == XK_h)
-		draw_circle(image, build_circle(WIN_WIDTH / 3, WIN_HEIGHT / 3,
-				350, color));
-	mlx_put_image_to_window(image->display->mlx_ptr,
-		image->display->win_ptr, image->image_ptr, 0, 0);
+	{
+		/* Ici il faut eteindre le UI d'aide (afficher les differentes touches, les parametres de fractale, etc...) */
+		ft_putchar_fd((char)key_sym, 1);
+		image->fractal.render = TRUE;
+	}
 	return (0);
 }
 
@@ -76,6 +81,16 @@ int button_handler(int button, int x, int y, t_image *image)
 	if (button == 1)
 		mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
 			x + 10, y + 10, 0xffff00, "Click!");
+	else if (button == 4)
+	{
+		image->fractal.zoom += 0.1;
+		image->fractal.render = TRUE;
+	}
+	else if (button == 5)
+	{
+		image->fractal.zoom -= 0.1;
+		image->fractal.render = TRUE;
+	}
 	return (0);
 }
 
@@ -84,7 +99,6 @@ int	button_rev_handler(int button, int x, int y, t_image *image)
 	(void)x;
 	(void)y;
 	if (button == 1)
-		mlx_put_image_to_window(image->display->mlx_ptr,
-			image->display->win_ptr, image->image_ptr, 0, 0);
+		image->fractal.render = TRUE;
 	return (0);
 }

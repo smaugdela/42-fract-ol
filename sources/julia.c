@@ -6,13 +6,13 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 18:12:02 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/16 14:43:57 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/16 18:58:05 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-float	ft_julia(t_complex c, t_fractal julia)
+static float	ft_julia(t_complex c, t_fractal julia)
 {
 	int			n;
 	float		tmp;
@@ -52,6 +52,5 @@ void	draw_julia(t_image *image, t_fractal julia)
 				draw_pixel(image, x, y, color_continuous(nu));
 		}
 	}
-	mlx_put_image_to_window(image->display->mlx_ptr,
-		image->display->win_ptr, image->image_ptr, 0, 0);
+	draw_ui(image);
 }

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   mandelbrot_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/14 16:13:59 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/16 19:05:42 by smagdela         ###   ########.fr       */
+/*   Created: 2021/12/16 18:54:46 by smagdela          #+#    #+#             */
+/*   Updated: 2021/12/16 18:55:05 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "fractol_bonus.h"
 
-static int	ft_mandelbrot(t_complex c)
+float	ft_mandelbrot(t_complex c)
 {
 	int			n;
 	float		tmp;
@@ -30,7 +30,7 @@ static int	ft_mandelbrot(t_complex c)
 	if (n == MAX_ITER)
 		return (-1);
 	else
-		return (n);
+		return (n + 1 - (log(2) / complex_magnitude(z)) / log(2));
 }
 
 void	draw_mandelbrot(t_image *image, t_fractal fractal)
@@ -38,25 +38,22 @@ void	draw_mandelbrot(t_image *image, t_fractal fractal)
 	t_complex   c;
 	int			x;
 	int			y;
-	int			n;
+	float		nu;
 
 	x = -1;
 	while (++x < WIN_WIDTH)
 	{
 		y = -1;
-		while (++y < WIN_HEIGHT / 2)
+		while (++y < WIN_HEIGHT)
 		{
-			c.re = (x - (WIN_WIDTH / 2)) * ((fractal.max_re - fractal.min_re)
-				/ (fractal.zoom * WIN_WIDTH));
-			c.im = (y - (WIN_HEIGHT / 2)) * ((fractal.max_im - fractal.min_im)
-				/ (fractal.zoom * WIN_HEIGHT));
-			n = ft_mandelbrot(c);
-			if (n == -1)
+			c.re = (x - (WIN_WIDTH / 2)) * ((fractal.max_re - fractal.min_re) / WIN_WIDTH);
+			c.im = (y - (WIN_HEIGHT / 2)) * ((fractal.max_im - fractal.min_im) / WIN_HEIGHT);
+			nu = ft_mandelbrot(c);
+			if (nu == -1)
 				draw_pixel(image, x, y, 0);
 			else
-				draw_pixel(image, x, y, color_monochrome(n, 'G'));
+				draw_pixel(image, x, y, color_continuous(nu));
 		}
 	}
-	real_axis_sym(image);
 	draw_ui(image);
 }

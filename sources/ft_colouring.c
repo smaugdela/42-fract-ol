@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:49:19 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/16 16:00:28 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/16 18:58:07 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	color_monochrome(int n, char color)
 		return ((0x0000ff00 * n / MAX_ITER) & 0x0000ff00);
 	else if (color == 'B')
 		return ((0x000000ff * n / MAX_ITER) & 0x000000ff);
-	/* Only primary colors are working, not composed as below. */
+	/* Only primary colors are working, not composed ones as below. */
 	else if (color == 'C')
 		return ((0x0000ffff * n / MAX_ITER) & 0x0000ffff);
 	else if (color == 'M')

@@ -6,49 +6,71 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 16:27:37 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/16 16:00:37 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/16 18:51:45 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static int	init_events(t_display *display, t_image *image)
+static void	check_args(int argc, char *argv, char **sets)
+{
+	while (argc == 2 && sets != NULL)
+	{
+		if (ft_strncmp(argv, *sets, ft_max(ft_strlen(argv), ft_strlen(*sets)))
+			== 0)
+			return ;
+		++sets;
+	}
+	ft_pustr_fd("Bad input:\n", 2);
+	ft_pustr_fd("Usage: ./fractol <name of fractal set>\n", 1);
+	ft_putstr_fd("List of available sets:\n - Mandelbrot\n - Julia\n", 1);
+	exit (42);
+}
+
+static void	init_events(t_display *display, t_image *image)
 {
 	mlx_loop_hook(display->mlx_ptr, &loop_handler, image);
+	mlx_hook(display->win_ptr, DestroyNotify, StructureNotifyMask,
+		&red_cross_handler, image);
 	mlx_hook(display->win_ptr, KeyPress, KeyPressMask, &keys_handler, image);
 	mlx_hook(display->win_ptr, KeyRelease, KeyReleaseMask,
 		&keys_rev_handler, image);
-	mlx_hook(display->win_ptr, DestroyNotify, StructureNotifyMask,
-		&red_cross_handler, image);
 	mlx_hook(display->win_ptr, ButtonPress, ButtonPressMask,
 		&button_handler, image);
 	mlx_hook(display->win_ptr, ButtonRelease, ButtonReleaseMask,
 		&button_rev_handler, image);
 	mlx_hook(display->win_ptr, MotionNotify, PointerMotionMask,
 		&pointer_handler, image);
-	return (0);
 }
 
-int	main(void)
+static t_fractal	init_fractal(t_image *image, char *set)
+{
+	t_fractal	fractal;
+
+	fractal.max_re = 1;
+	fractal.min_re = -4;
+	fractal.max_im = 1.5;
+	fractal.min_im = -1.5;
+	fractal.zoom = 1.0;
+	fractal.details_iter = MAX_ITER;
+	fractal.render = TRUE;
+	image->fractal = fractal;
+	return (fractal);
+}
+
+int	main(int argc, char *argv)
 {
 	t_display	*display;
 	t_image		*image;
-	t_fractal	julia;
-	t_complex	param;
+	t_fractal	fractal;
 
-	display = init_display("Hello World!");
+	check_args(argc, argv, ["Mandelbrot", "Julia"]);
+	display = init_display("fract'ol");
 	image = init_image(display);
+	fractal = init_fractal(image, argv[1]);
 	init_events(display, image);
-	param.re = 0;
-	param.im = 0;
 
-	mandelbrot.max_im = 1.1;
-	mandelbrot.min_im = -1.1;
-	mandelbrot.max_re = 0.01;
-	mandelbrot.min_re = -3.5;
-	mandelbrot.param = param;
 	draw_mandelbrot(image, mandelbrot);
-	draw_ui(image);
 /*
 	julia.max_im = 1;
 	julia.min_im = -1;

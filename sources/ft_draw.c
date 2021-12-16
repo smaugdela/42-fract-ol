@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 12:56:01 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/16 16:00:33 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/16 17:35:46 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,27 +57,36 @@ int	draw_ui(t_image *image)
 	int	color;
 
 	color = get_pixel_color(WIN_WIDTH - 10, WIN_HEIGHT - 10, image);
-	color = 
+	color = revert_color(color);
 	mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
 		x - 20, y - 20, color, "H for help");
 }
 
-t_circle	*build_circle(int x, int y, double r, int color)
+t_circle	*build_circle(int coord[2], double r, int color, t_bool bord)
 {
 	t_circle	*circle;
 
-	circle = NULL;
 	circle = malloc(1 * sizeof(t_circle));
 	if (circle == NULL)
 		return (NULL);
-	circle->x_c = x;
-	circle->y_c = y;
-	circle->r = r;
+	if (coord[0] < 0)
+		circle->x_c = 0;
+	else
+		circle->x_c = coord[0];
+	if (coord[1] < 0)
+		circle->y_c = 0;
+	else
+		circle->y_c = coord[1];
+	if (r <= 0)
+		circle->r = 1;
+	else
+		circle->r = r;
 	circle->color = color;
+	circle->border_only = bord;
 	return (circle);
 }
 
-int	draw_circle(t_image *image, t_circle *circle)
+void	draw_circle(t_image *image, t_circle *circle)
 {
 	int	i;
 	int	j;
@@ -88,16 +97,20 @@ int	draw_circle(t_image *image, t_circle *circle)
 		ft_error("malloc");
 	}
 	i = circle->x_c - circle->r - 1;
-	while (++i < WIN_WIDTH)
+	while (++i < WIN_WIDTH && i < circle->x_c + circle->r)
 	{
 		j = circle->y_c - circle->r - 1;
-		while (++j < WIN_HEIGHT)
+		while (++j < WIN_HEIGHT && j < circle->y_c + circle->r)
 		{
-			if (sqrt(pow(circle->x_c - i, 2) + pow(circle->y_c - j, 2))
+			if (circle->border_only == TRUE
+				&& sqrt(pow(circle->x_c - i, 2) + pow(circle->y_c - j, 2))
+				== circle->r)
+				draw_pixel(image, i, j, circle->color);
+			else if (circle->border_only == FALSE
+				&& sqrt(pow(circle->x_c - i, 2) + pow(circle->y_c - j, 2))
 				<= circle->r)
 				draw_pixel(image, i, j, circle->color);
 		}
 	}
 	free(circle);
-	return (0);
 }

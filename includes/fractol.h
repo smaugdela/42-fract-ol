@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 15:24:29 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/16 16:00:36 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/16 19:09:21 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@
 # include <X11/X.h>
 # include <X11/Xlib.h>
 
-# define WIN_WIDTH  1920
-# define WIN_HEIGHT	1080
+# define WIN_WIDTH  1280
+# define WIN_HEIGHT	720
 
 # define TRUE	1
 # define FALSE	0
 
-# define MAX_ITER	10
+# define MAX_ITER	15
 
 typedef int8_t	t_bool;
 
@@ -46,6 +46,7 @@ typedef	struct s_fractal {
 	float	min_im;
 	int		details_iter;
 	float	zoom;
+	t_bool	render;
 }	t_fractal;
 
 /* Data structures for mlx */
@@ -56,6 +57,7 @@ typedef struct s_display {
 
 typedef struct s_image {
 	t_display	*display;
+	t_fractal	fractal;
 	void		*image_ptr;
 	char		*addr;
 	int			bpp;
@@ -100,18 +102,17 @@ int			red_cross_handler(t_image *image);
 int			draw_pixel(t_image *image, int x, int y, int color);
 int			clear_window(t_image *image, int color);
 t_circle	*build_circle(int x, int y, double r, int color);
-int			draw_circle(t_image *image, t_circle *circle);
+void		draw_circle(t_image *image, t_circle *circle);
 t_circle	*build_rectangle(int x, int y, double r, int color);
-int			draw_rectangle(t_image *image, t_rectangle *rectangle);
+void		draw_rectangle(t_image *image, t_rectangle *rectangle);
 
 /* Colouring functions */
 int			get_pixel_color(int x, int y, t_image *image);
 int			color_monochrome(int n, char color);
+int			revert_color(int color);
 
 /* Fractals definitions */
 float		complex_magnitude(t_complex z);
-float		ft_mandelbrot(t_complex c);
-float		ft_julia(t_complex c, t_fractal julia);
 void		draw_mandelbrot(t_image *image, t_fractal fractal);
 void		draw_julia(t_image *image, t_fractal fractal);
 
