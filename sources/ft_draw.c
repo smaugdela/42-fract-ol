@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 12:56:01 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/16 17:35:46 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/17 15:30:17 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ int	clear_window(t_image *image, int color)
 	int	j;
 
 	i = -1;
-	while (++i < WIN_WIDTH)
+	while (++i < WIN_W)
 	{
 		j = -1;
-		while (++j < WIN_HEIGHT)
+		while (++j < WIN_H)
 		{
 			if (get_pixel_color(i, j, image) > 0)
 				draw_pixel(image, i, j, color);
@@ -52,14 +52,13 @@ int	clear_window(t_image *image, int color)
 	return (0);
 }
 
-int	draw_ui(t_image *image)
+void	draw_ui(t_image *image)
 {
 	int	color;
 
-	color = get_pixel_color(WIN_WIDTH - 10, WIN_HEIGHT - 10, image);
-	color = revert_color(color);
+	color = 0xffffff;
 	mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
-		x - 20, y - 20, color, "H for help");
+		WIN_W - 20, WIN_H - 20, color, "H for help");
 }
 
 t_circle	*build_circle(int coord[2], double r, int color, t_bool bord)
@@ -97,10 +96,10 @@ void	draw_circle(t_image *image, t_circle *circle)
 		ft_error("malloc");
 	}
 	i = circle->x_c - circle->r - 1;
-	while (++i < WIN_WIDTH && i < circle->x_c + circle->r)
+	while (++i < WIN_W && i < circle->x_c + circle->r)
 	{
 		j = circle->y_c - circle->r - 1;
-		while (++j < WIN_HEIGHT && j < circle->y_c + circle->r)
+		while (++j < WIN_H && j < circle->y_c + circle->r)
 		{
 			if (circle->border_only == TRUE
 				&& sqrt(pow(circle->x_c - i, 2) + pow(circle->y_c - j, 2))

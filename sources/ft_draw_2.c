@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 09:23:31 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/16 19:09:19 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/17 15:26:39 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ void	draw_rectangle(t_image *image, t_rectangle *rectangle)
 		ft_error("malloc");
 	}
 	i = rectangle->x - 1;
-	while (++i < WIN_WIDTH && i < rectangle->x + rectangle->width)
+	while (++i < WIN_W && i < rectangle->x + rectangle->width)
 	{
 		j = rectangle->y - 1;
-		while (++j < WIN_HEIGHT && j < rectangle->y + rectangle->height)
+		while (++j < WIN_H && j < rectangle->y + rectangle->height)
 		{
 			if (rectangle->border_only == TRUE
 				&& (i == rectangle->x || i == rectangle->x + rectangle->width)
@@ -65,25 +65,4 @@ void	draw_rectangle(t_image *image, t_rectangle *rectangle)
 		}
 	}
 	free(rectangle);
-}
-
-void	real_axis(t_image *image)
-{
-	int	y;
-	int	y_sym;
-	int	x;
-
-	x = 0;
-	while (x < WIN_WIDTH)
-	{
-		y = 0;
-		y_sym = WIN_HEIGHT;
-		while (y < WIN_HEIGHT / 2)
-		{
-			draw_pixel(image, x, y_sym, get_pixel_color(x, y, image));
-			++y;
-			--y_sym;
-		}
-		++x;
-	}
 }

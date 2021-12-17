@@ -6,23 +6,49 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 16:27:37 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/16 18:51:45 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/17 16:07:44 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void	check_args(int argc, char *argv, char **sets)
+static char	*fract_sets(void **ft_ptr, int i)
 {
-	while (argc == 2 && sets != NULL)
+	char		*sets[3];
+	void		*ft_list[3];
+
+	sets[0] = "Mandelbrot";
+	sets[1] = "Julia";
+	sets[2] = NULL;
+	ft_list[0] = &draw_mandelbrot;
+	ft_list[1] = &draw_julia;
+	ft_list[2] = NULL;
+	if (i >= 0 && i <= 2)
 	{
-		if (ft_strncmp(argv, *sets, ft_max(ft_strlen(argv), ft_strlen(*sets)))
-			== 0)
-			return ;
-		++sets;
+		*ft_ptr = ft_list[i];
+		return (sets[i]);
 	}
-	ft_pustr_fd("Bad input:\n", 2);
-	ft_pustr_fd("Usage: ./fractol <name of fractal set>\n", 1);
+	return (NULL);
+}
+
+static void	*check_args(int argc, char *set)
+{
+	int		i;
+	void	*ft;
+	char	*available_sets;
+
+	i = 0;
+	ft = NULL;
+	available_sets = fract_sets(&ft, i);
+	while (argc == 2 && available_sets != NULL)
+	{
+		if (ft_strncmp(set, available_sets,
+			max(ft_strlen(set), ft_strlen(available_sets))) == 0)
+			return (ft);
+		available_sets = fract_sets(ft, i);
+		++i;
+	}
+	ft_putstr_fd("Usage: ./fractol <name of fractal set>\n", 1);
 	ft_putstr_fd("List of available sets:\n - Mandelbrot\n - Julia\n", 1);
 	exit (42);
 }
@@ -43,9 +69,10 @@ static void	init_events(t_display *display, t_image *image)
 		&pointer_handler, image);
 }
 
-static t_fractal	init_fractal(t_image *image, char *set)
+static t_fractal	init_fractal(t_image *image, void *draw_ft)
 {
 	t_fractal	fractal;
+	t_complex	z;
 
 	fractal.max_re = 1;
 	fractal.min_re = -4;
@@ -53,33 +80,29 @@ static t_fractal	init_fractal(t_image *image, char *set)
 	fractal.min_im = -1.5;
 	fractal.zoom = 1.0;
 	fractal.details_iter = MAX_ITER;
+	z.re = 0.0;
+	z.im = 0.0;
+	fractal.param = z;
 	fractal.render = TRUE;
+	fractal.image = image;
+	fractal.draw_ft = draw_ft;
 	image->fractal = fractal;
 	return (fractal);
 }
 
-int	main(int argc, char *argv)
+int	main(int argc, char **argv)
 {
 	t_display	*display;
 	t_image		*image;
 	t_fractal	fractal;
-
-	check_args(argc, argv, ["Mandelbrot", "Julia"]);
+	void 		(*draw_ft)(t_fractal);
+	
+	draw_ft = check_args(argc, argv[1]);
 	display = init_display("fract'ol");
 	image = init_image(display);
-	fractal = init_fractal(image, argv[1]);
+	fractal = init_fractal(image, draw_ft);
 	init_events(display, image);
-
-	draw_mandelbrot(image, mandelbrot);
-/*
-	julia.max_im = 1;
-	julia.min_im = -1;
-	julia.max_re = 1;
-	julia.min_re = -1;
-	julia.param = param;
-	draw_julia(image, julia);
-	image->fractal = julia;
-*/
+	draw_ft(fractal);
 	mlx_loop(display->mlx_ptr);
 	free_n_destroy(image, display);
 	ft_putstr_fd("\nStopping...\nThanks for using fract'ol!\n", 1);

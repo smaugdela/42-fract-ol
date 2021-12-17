@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 18:54:46 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/16 18:55:05 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/17 15:27:13 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ void	draw_mandelbrot(t_image *image, t_fractal fractal)
 	float		nu;
 
 	x = -1;
-	while (++x < WIN_WIDTH)
+	while (++x < WIN_W)
 	{
 		y = -1;
-		while (++y < WIN_HEIGHT)
+		while (++y < WIN_H)
 		{
-			c.re = (x - (WIN_WIDTH / 2)) * ((fractal.max_re - fractal.min_re) / WIN_WIDTH);
-			c.im = (y - (WIN_HEIGHT / 2)) * ((fractal.max_im - fractal.min_im) / WIN_HEIGHT);
+			c.re = (x - (WIN_W / 2)) * ((fractal.max_re - fractal.min_re) / WIN_W);
+			c.im = (y - (WIN_H / 2)) * ((fractal.max_im - fractal.min_im) / WIN_H);
 			nu = ft_mandelbrot(c);
 			if (nu == -1)
 				draw_pixel(image, x, y, 0);

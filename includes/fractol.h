@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 15:24:29 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/16 19:09:21 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/17 16:21:58 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@
 # include <X11/X.h>
 # include <X11/Xlib.h>
 
-# define WIN_WIDTH  1280
-# define WIN_HEIGHT	720
+# define WIN_W  1280
+# define WIN_H	720
 
 # define TRUE	1
 # define FALSE	0
 
-# define MAX_ITER	15
+# define MAX_ITER	5
 
 typedef int8_t	t_bool;
 
@@ -40,13 +40,16 @@ typedef struct s_complex {
 }	t_complex;
 
 typedef	struct s_fractal {
-	float	max_re;
-	float	max_im;
-	float	min_re;
-	float	min_im;
-	int		details_iter;
-	float	zoom;
-	t_bool	render;
+	float		max_re;
+	float		max_im;
+	float		min_re;
+	float		min_im;
+	float		zoom;
+	int			details_iter;
+	t_complex	param;
+	t_bool		render;
+	void		*image;
+	void 		(*draw_ft)(struct s_fractal);
 }	t_fractal;
 
 /* Data structures for mlx */
@@ -101,10 +104,11 @@ int			red_cross_handler(t_image *image);
 /* Drawing functions */
 int			draw_pixel(t_image *image, int x, int y, int color);
 int			clear_window(t_image *image, int color);
-t_circle	*build_circle(int x, int y, double r, int color);
+t_circle	*build_circle(int coord[2], double r, int color, t_bool bord);
 void		draw_circle(t_image *image, t_circle *circle);
-t_circle	*build_rectangle(int x, int y, double r, int color);
+t_rectangle	*build_rectangle(int coord[2], int dim[2], int color, t_bool bord);
 void		draw_rectangle(t_image *image, t_rectangle *rectangle);
+void		draw_ui(t_image *image);
 
 /* Colouring functions */
 int			get_pixel_color(int x, int y, t_image *image);
@@ -112,8 +116,11 @@ int			color_monochrome(int n, char color);
 int			revert_color(int color);
 
 /* Fractals definitions */
+void		draw_mandelbrot(t_fractal fractal);
+void		draw_julia(t_fractal fractal);
+
+/* Toolbox */
 float		complex_magnitude(t_complex z);
-void		draw_mandelbrot(t_image *image, t_fractal fractal);
-void		draw_julia(t_image *image, t_fractal fractal);
+int 		max(int a, int b);
 
 #endif

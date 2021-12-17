@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:49:19 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/16 18:58:07 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/17 15:25:28 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	color_monochrome(int n, char color)
 	else
 		return ((0x00ffffff * n / MAX_ITER) & 0x00ffffff);
 }
-
+/*
 int	revert_color(int color)
 {
 	uint8_t	color_bytes[4];
@@ -54,3 +54,4 @@ int	revert_color(int color)
 	color = color | color_bytes[3];
 	return (color);
 }
+*/

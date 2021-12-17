@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 10:30:00 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/15 18:26:05 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/17 14:22:48 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_image	*init_image(t_display *display)
 		ft_error("init_image");
 	}
 	image->display = display;
-	image->image_ptr = mlx_new_image(display->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
+	image->image_ptr = mlx_new_image(display->mlx_ptr, WIN_W, WIN_H);
 	image->addr = mlx_get_data_addr(image->image_ptr,
 			&image->bpp, &image->size_line, &image->endian);
 	if (image == NULL || image->image_ptr == NULL || image->addr == NULL)
@@ -87,16 +87,11 @@ t_display	*init_display(char *win_name)
 		ft_error("mlx_init");
 	}
 	display->win_ptr = mlx_new_window(display->mlx_ptr,
-			WIN_WIDTH, WIN_HEIGHT, win_name);
+			WIN_W, WIN_H, win_name);
 	if (display->win_ptr == NULL)
 	{
 		free_n_destroy(NULL, display);
 		ft_error("mlx_new_window");
 	}
 	return (display);
-}
-
-float	complex_magnitude(t_complex z)
-{
-	return (sqrt(pow(z.re, 2) + pow(z.im, 2)));
 }

@@ -6,51 +6,73 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 18:12:02 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/16 18:58:05 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/17 16:05:36 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static float	ft_julia(t_complex c, t_fractal julia)
+static void	real_axis_sym(t_image *image)
+{
+	int	y;
+	int	y_sym;
+	int	x;
+
+	x = 0;
+	while (x < WIN_W)
+	{
+		y = 0;
+		y_sym = WIN_H;
+		while (y < WIN_H / 2)
+		{
+			draw_pixel(image, x, y_sym, get_pixel_color(x, y, image));
+			++y;
+			--y_sym;
+		}
+		++x;
+	}
+}
+
+static int	ft_julia(t_complex c, t_complex param)
 {
 	int			n;
 	float		tmp;
 
 	n = 0;
-	while (pow(julia.param.re, 2) + pow(julia.param.im, 2) < 4 && ++n < MAX_ITER)
+	while (pow(param.re, 2) + pow(param.im, 2) < 4 && ++n < MAX_ITER)
 	{
-		tmp = pow(julia.param.re, 2) - pow(julia.param.im, 2) + c.re;
-		julia.param.im = 2 * julia.param.re * julia.param.im + c.im;
-		julia.param.re = tmp;
+		tmp = pow(param.re, 2) - pow(param.im, 2) + c.re;
+		param.im = 2 * param.re * param.im + c.im;
+		param.re = tmp;
 	}
 	if (n == MAX_ITER)
 		return (-1);
 	else
-		return (n + 1 - (log(2) / complex_magnitude(julia.param)) / log(2));
+		return (n);
 }
 
-void	draw_julia(t_image *image, t_fractal julia)
+void	draw_julia(t_fractal params)
 {
 	t_complex   c;
 	int			x;
 	int			y;
-	float		nu;
+	int			n;
 
 	x = -1;
-	while (++x < WIN_WIDTH)
+	while (++x < WIN_W)
 	{
 		y = -1;
-		while (++y < WIN_HEIGHT)
+		while (++y <= WIN_H)
 		{
-			c.re = (x - (WIN_WIDTH / 2)) * ((julia.max_re - julia.min_re) / WIN_WIDTH);
-			c.im = (y - (WIN_HEIGHT / 2)) * ((julia.max_im - julia.min_im) / WIN_HEIGHT);
-			nu = ft_julia(c, julia);
-			if (nu == -1)
-				draw_pixel(image, x, y, 0);
+			c.re = (x - (WIN_W / 2)) * ((params.max_re - params.min_re) / WIN_W);
+			c.im = (y - (WIN_H / 2)) * ((params.max_im - params.min_im) / WIN_H);
+			n = ft_julia(c, params.param);
+			if (n == -1)
+				draw_pixel(params.image, x, y, 0);
 			else
-				draw_pixel(image, x, y, color_continuous(nu));
+				draw_pixel(params.image, x, y, color_monochrome(n, 'B'));
 		}
 	}
-	draw_ui(image);
+	real_axis_sym(params.image);
+	draw_ui(params.image);
 }

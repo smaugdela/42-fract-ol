@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:45:38 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/16 18:52:55 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/17 16:29:24 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	loop_handler(t_image *image)
 {	
 	if (image->fractal.render == TRUE)
 	{
+		image->fractal.draw_ft(image->fractal);
 		mlx_put_image_to_window(image->display->mlx_ptr,
 			image->display->win_ptr, image->image_ptr, 0, 0);
 		image->fractal.render = FALSE;
@@ -34,9 +35,31 @@ int	keys_handler(int key_sym, t_image *image)
 	else if (key_sym == XK_h)
 	{
 		/* Ici il faut afficher le UI d'aide (afficher les differentes touches, les parametres de fractale, etc...) */
-		ft_putchar_fd((char)key_sym, 1);
 		image->fractal.render = TRUE;
 	}
+	else if (key_sym == XK_Right)
+	{
+		image->fractal.max_re += 0.1;
+		image->fractal.min_re += 0.1;
+		image->fractal.render = TRUE;
+	}
+	else if (key_sym == XK_Left)
+	{
+		image->fractal.max_re -= 0.1;
+		image->fractal.min_re -= 0.1;
+		image->fractal.render = TRUE;
+	}
+	else if (key_sym == XK_KP_Add)
+	{
+		image->fractal.details_iter += 10;
+		image->fractal.render = TRUE;
+	}
+	else if (key_sym == XK_KP_Subtract)
+	{
+		image->fractal.details_iter += 10;
+		image->fractal.render = TRUE;
+	}
+	ft_putnbr_fd(key_sym, 1);
 	return (0);
 }
 
@@ -56,7 +79,8 @@ int	keys_rev_handler(int key_sym, t_image *image)
 
 int	pointer_handler(int x, int y, t_image *image)
 {
-	if (x >= 0 && x <= WIN_WIDTH && y >= 0 && y <= WIN_HEIGHT)
+	(void)image;
+	if (x >= 0 && x <= WIN_W && y >= 0 && y <= WIN_H)
 	{
 		ft_putstr_fd("Mouse coordinates = (", 1);
 		ft_putnbr_fd(x, 1);
@@ -91,6 +115,7 @@ int button_handler(int button, int x, int y, t_image *image)
 		image->fractal.zoom -= 0.1;
 		image->fractal.render = TRUE;
 	}
+	ft_putnbr_fd(button, 1);
 	return (0);
 }
 
