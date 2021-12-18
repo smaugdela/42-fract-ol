@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 12:56:01 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/17 15:30:17 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/18 13:53:16 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,18 @@ int	clear_window(t_image *image, int color)
 	return (0);
 }
 
-void	draw_ui(t_image *image)
+void	draw_ui(t_image *image, t_bool display_ui)
 {
-	int	color;
-
-	color = 0xffffff;
-	mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
-		WIN_W - 20, WIN_H - 20, color, "H for help");
+	if (display_ui)
+	{
+		mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
+			WIN_W / 2, WIN_H / 2, 0x00aa00ff, "Here's the help: ");
+	}
+	else
+	{
+		mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
+			15, 20, 0x00ffffff, "H for help");
+	}
 }
 
 t_circle	*build_circle(int coord[2], double r, int color, t_bool bord)

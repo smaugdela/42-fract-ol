@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 16:27:37 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/17 16:07:44 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/18 13:53:13 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ static t_fractal	init_fractal(t_image *image, void *draw_ft)
 	z.im = 0.0;
 	fractal.param = z;
 	fractal.render = TRUE;
+	fractal.display_ui = FALSE;
 	fractal.image = image;
 	fractal.draw_ft = draw_ft;
 	image->fractal = fractal;

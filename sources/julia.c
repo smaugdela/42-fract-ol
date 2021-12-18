@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 18:12:02 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/17 16:05:36 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/18 13:53:15 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,4 @@ void	draw_julia(t_fractal params)
 		}
 	}
 	real_axis_sym(params.image);
-	draw_ui(params.image);
 }

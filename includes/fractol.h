@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 15:24:29 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/17 16:21:58 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/18 12:55:05 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef	struct s_fractal {
 	int			details_iter;
 	t_complex	param;
 	t_bool		render;
+	t_bool		display_ui;
 	void		*image;
 	void 		(*draw_ft)(struct s_fractal);
 }	t_fractal;
@@ -108,7 +109,7 @@ t_circle	*build_circle(int coord[2], double r, int color, t_bool bord);
 void		draw_circle(t_image *image, t_circle *circle);
 t_rectangle	*build_rectangle(int coord[2], int dim[2], int color, t_bool bord);
 void		draw_rectangle(t_image *image, t_rectangle *rectangle);
-void		draw_ui(t_image *image);
+void		draw_ui(t_image *image, t_bool display_ui);
 
 /* Colouring functions */
 int			get_pixel_color(int x, int y, t_image *image);
