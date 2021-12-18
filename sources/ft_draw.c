@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 12:56:01 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/18 13:53:16 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/18 16:11:10 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	draw_ui(t_image *image, t_bool display_ui)
 	if (display_ui)
 	{
 		mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
-			WIN_W / 2, WIN_H / 2, 0x00aa00ff, "Here's the help: ");
+			WIN_W / 2, WIN_H / 2, 0x00aa00ff, "Here's the help: RTFM");
 	}
 	else
 	{

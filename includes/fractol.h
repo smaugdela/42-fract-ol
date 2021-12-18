@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 15:24:29 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/18 12:55:05 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/18 15:31:17 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define TRUE	1
 # define FALSE	0
 
-# define MAX_ITER	5
+# define MAX_ITER	10
 
 typedef int8_t	t_bool;
 
@@ -44,7 +44,6 @@ typedef	struct s_fractal {
 	float		max_im;
 	float		min_re;
 	float		min_im;
-	float		zoom;
 	int			details_iter;
 	t_complex	param;
 	t_bool		render;

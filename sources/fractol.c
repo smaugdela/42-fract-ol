@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 16:27:37 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/18 13:53:13 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/18 16:10:57 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,10 @@ static t_fractal	init_fractal(t_image *image, void *draw_ft)
 	t_fractal	fractal;
 	t_complex	z;
 
-	fractal.max_re = 1;
-	fractal.min_re = -4;
+	fractal.max_re = 1.5;
+	fractal.min_re = -3;
 	fractal.max_im = 1.5;
 	fractal.min_im = -1.5;
-	fractal.zoom = 1.0;
 	fractal.details_iter = MAX_ITER;
 	z.re = 0.0;
 	z.im = 0.0;
@@ -103,7 +102,6 @@ int	main(int argc, char **argv)
 	image = init_image(display);
 	fractal = init_fractal(image, draw_ft);
 	init_events(display, image);
-	draw_ft(fractal);
 	mlx_loop(display->mlx_ptr);
 	free_n_destroy(image, display);
 	ft_putstr_fd("\nStopping...\nThanks for using fract'ol!\n", 1);

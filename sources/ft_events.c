@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:45:38 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/18 14:05:41 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/18 16:14:38 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ int	keys_handler(int key_sym, t_image *image)
 		image->fractal.max_im -= 0.1;
 		image->fractal.min_im -= 0.1;
 	}
-	else if (key_sym == XK_KP_Add)
+	else if (key_sym == XK_KP_Add && image->fractal.details_iter < 200)
 		image->fractal.details_iter += 5;
-	else if (key_sym == XK_KP_Subtract)
+	else if (key_sym == XK_KP_Subtract && image->fractal.details_iter >= 10)
 		image->fractal.details_iter -= 5;
 	image->fractal.render = TRUE;
 	return (0);
@@ -106,17 +106,20 @@ int button_handler(int button, int x, int y, t_image *image)
 			x + 10, y + 10, 0xffff00, "Click!");
 	else if (button == 4)
 	{
-		image->fractal.zoom += 0.1;
-		image->fractal.details_iter = MAX_ITER;
+		image->fractal.max_im *= 0.9;
+		image->fractal.min_im *= 0.9;
+		image->fractal.max_re *= 0.9;
+		image->fractal.min_re *= 0.9;
 		image->fractal.render = TRUE;
 	}
 	else if (button == 5)
 	{
-		image->fractal.zoom -= 0.1;
-		image->fractal.details_iter = MAX_ITER;
+		image->fractal.max_im *= 1.1;
+		image->fractal.min_im *= 1.1;
+		image->fractal.max_re *= 1.1;
+		image->fractal.min_re *= 1.1;
 		image->fractal.render = TRUE;
 	}
-	ft_putnbr_fd(button, 1);
 	return (0);
 }
 
