@@ -6,43 +6,11 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 16:13:59 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/18 16:24:33 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/20 15:06:34 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-static void	real_axis_sym(t_image *image, int real_axis)
-{
-	int	y;
-	int	y_sym;
-	int	x;
-
-	if (real_axis <= 0 || real_axis >= WIN_H)
-		return ;
-	x = 0;
-	while (x < WIN_W)
-	{
-		if (real_axis % 2 == 0)
-		{
-			y = real_axis;
-			y_sym = real_axis;
-		}
-		else
-		{
-			y = real_axis - 1;
-			y_sym = real_axis + 1;
-		}
-		while (++y <= WIN_H && --y_sym >= 0)
-		{
-			if (real_axis >= WIN_H / 2)
-				draw_pixel(image, x, y, get_pixel_color(x, y_sym, image));
-			else
-				draw_pixel(image, x, y_sym, get_pixel_color(x, y, image));
-		}
-		++x;
-	}
-}
 
 static int	ft_mandelbrot(t_complex c, int max_iter)
 {
@@ -65,52 +33,29 @@ static int	ft_mandelbrot(t_complex c, int max_iter)
 		return (n);
 }
 
-void	draw_mandelbrot(t_fractal params)
+void	draw_mandelbrot(t_fractal para, int xmin, int ymin, int xmax, int ymax)
 {
 	t_complex   c;
 	int			x;
 	int			y;
 	int			n;
 
-	x = -1;
-	while (++x <= WIN_W)
+	x = xmin - 1;
+	while (++x <= WIN_W && x <= xmax)
 	{
-		c.im = 0;
-		if (fabs(params.max_im) >= fabs(params.min_im))
+		y = ymin - 1;
+		while (++y <= WIN_H && y <= ymax)
 		{
-			y = -1;
-			while (++y <= WIN_H && c.im >= 0)
-			{
-				c.re = x * ((params.max_re - params.min_re) /
-					(WIN_W)) + params.min_re;
-				c.im = (-1 * y) * ((params.max_im - params.min_im) /
-					(WIN_H)) + params.max_im;
-				n = ft_mandelbrot(c, params.details_iter);
-				if (n == -1)
-					draw_pixel(params.image, x, y, 0);
-				else
-					draw_pixel(params.image, x, y, color_monochrome(n, 'R'));
-			}
-			--y;
+			c.re = x * ((para.max_re - para.min_re) /
+				(WIN_W)) + para.min_re;
+			c.im = (-1 * y) * ((para.max_im - para.min_im) /
+				(WIN_H)) + para.max_im;
+			n = ft_mandelbrot(c, para.details_iter);
+			if (n == -1)
+				draw_pixel(para.image, x, y, 0);
+			else
+				draw_pixel(para.image, x, y, color_monochrome(n, 'R'));
 		}
-		else
-		{
-			y = WIN_H + 1;
-			while (--y >= 0 && c.im <= 0)
-			{
-				c.re = x * ((params.max_re - params.min_re) /
-					(WIN_W)) + params.min_re;
-				c.im = (-1 * y) * ((params.max_im - params.min_im) /
-					(WIN_H)) + params.max_im;
-				n = ft_mandelbrot(c, params.details_iter);
-				if (n == -1)
-					draw_pixel(params.image, x, y, 0);
-				else
-					draw_pixel(params.image, x, y, color_monochrome(n, 'R'));
-			}
-			++y;
-		}
+		--y;
 	}
-	printf("real_axis = %d\n", y);
-	real_axis_sym(params.image, y);
 }

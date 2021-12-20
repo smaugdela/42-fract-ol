@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 15:24:29 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/18 15:31:17 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/20 15:08:02 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef	struct s_fractal {
 	t_bool		render;
 	t_bool		display_ui;
 	void		*image;
-	void 		(*draw_ft)(struct s_fractal);
+	void 		(*draw_ft)(struct s_fractal, int, int, int, int);
 }	t_fractal;
 
 /* Data structures for mlx */
@@ -67,7 +67,7 @@ typedef struct s_image {
 	int			size_line;
 	int			endian;
 }	t_image;
-
+ 
 /* Geometry structures */
 typedef struct s_circle {
 	int		x_c;
@@ -116,7 +116,7 @@ int			color_monochrome(int n, char color);
 int			revert_color(int color);
 
 /* Fractals definitions */
-void		draw_mandelbrot(t_fractal fractal);
+void	draw_mandelbrot(t_fractal para, int xmin, int ymin, int xmax, int ymax);
 void		draw_julia(t_fractal fractal);
 
 /* Toolbox */

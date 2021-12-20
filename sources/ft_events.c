@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:45:38 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/18 16:14:38 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/20 15:26:23 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	loop_handler(t_image *image)
 {	
 	if (image->fractal.render == TRUE)
 	{
-		image->fractal.draw_ft(image->fractal);
+		image->fractal.draw_ft(image->fractal, 0, 0, WIN_W, WIN_H);
 		mlx_put_image_to_window(image->display->mlx_ptr,
 			image->display->win_ptr, image->image_ptr, 0, 0);
 		draw_ui(image, image->fractal.display_ui);
@@ -36,25 +36,13 @@ int	keys_handler(int key_sym, t_image *image)
 	else if (key_sym == XK_h)
 		image->fractal.display_ui = TRUE;
 	else if (key_sym == XK_Right)
-	{
-		image->fractal.max_re += 0.1;
-		image->fractal.min_re += 0.1;
-	}
+		cam_right(image);
 	else if (key_sym == XK_Left)
-	{
-		image->fractal.max_re -= 0.1;
-		image->fractal.min_re -= 0.1;
-	}
+		cam_left(image);
 	else if (key_sym == XK_Up)
-	{
-		image->fractal.max_im += 0.1;
-		image->fractal.min_im += 0.1;
-	}
+		cam_up(image);
 	else if (key_sym == XK_Down)
-	{
-		image->fractal.max_im -= 0.1;
-		image->fractal.min_im -= 0.1;
-	}
+		cam_down(image);
 	else if (key_sym == XK_KP_Add && image->fractal.details_iter < 200)
 		image->fractal.details_iter += 5;
 	else if (key_sym == XK_KP_Subtract && image->fractal.details_iter >= 10)
@@ -106,18 +94,18 @@ int button_handler(int button, int x, int y, t_image *image)
 			x + 10, y + 10, 0xffff00, "Click!");
 	else if (button == 4)
 	{
-		image->fractal.max_im *= 0.9;
-		image->fractal.min_im *= 0.9;
-		image->fractal.max_re *= 0.9;
-		image->fractal.min_re *= 0.9;
+		image->fractal.max_im -= 0.2;
+		image->fractal.min_im -= 0.2;
+		image->fractal.max_re -= 0.2;
+		image->fractal.min_re -= 0.2;
 		image->fractal.render = TRUE;
 	}
 	else if (button == 5)
 	{
-		image->fractal.max_im *= 1.1;
-		image->fractal.min_im *= 1.1;
-		image->fractal.max_re *= 1.1;
-		image->fractal.min_re *= 1.1;
+		image->fractal.max_im += 0.2;
+		image->fractal.min_im += 0.2;
+		image->fractal.max_re += 0.2;
+		image->fractal.min_re += 0.2;
 		image->fractal.render = TRUE;
 	}
 	return (0);

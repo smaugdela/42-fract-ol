@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 16:27:37 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/18 16:10:57 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/20 15:08:40 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	main(int argc, char **argv)
 	t_display	*display;
 	t_image		*image;
 	t_fractal	fractal;
-	void 		(*draw_ft)(t_fractal);
+	void 		(*draw_ft)(t_fractal, int, int, int, int);
 	
 	draw_ft = check_args(argc, argv[1]);
 	display = init_display("fract'ol");
