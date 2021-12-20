@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 16:13:59 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/20 15:34:35 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/20 19:16:26 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ void	draw_mandelbrot(t_fractal para, int xmin, int ymin, int xmax, int ymax)
 	int			n;
 
 	x = xmin - 1;
-	while (++x <= WIN_W && x <= xmax)
+	while (++x < WIN_W && x <= xmax)
 	{
 		y = ymin - 1;
-		while (++y <= WIN_H && y <= ymax)
+		while (++y < WIN_H && y <= ymax)
 		{
 			c.re = x * ((para.max_re - para.min_re) /
 				(WIN_W)) + para.min_re;

@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 12:56:01 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/18 16:11:10 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/20 19:01:55 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	draw_pixel(t_image *image, int x, int y, int color)
 	char	*pixel;
 	int		i;
 
+	if (x > WIN_W || x < 0 || y > WIN_H || y < 0)
+		return (42);
 	pixel = image->addr + (y * image->size_line + x * (image->bpp / 8));
 	color = mlx_get_color_value(image->display->mlx_ptr, color);
 	i = image->bpp;

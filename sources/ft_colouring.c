@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:49:19 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/17 15:25:28 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/20 19:01:52 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	get_pixel_color(int x, int y, t_image *image)
 {
 	char	*pixel;
 
+	if (x > WIN_W || x < 0 || y > WIN_H || y < 0)
+		return (42);
 	pixel = image->addr + (y * image->size_line + x * (image->bpp / 8));
 	return (*(int *)pixel);
 }

@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 15:24:29 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/20 16:59:21 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/20 17:55:28 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <X11/X.h>
 # include <X11/Xlib.h>
 
-# define WIN_W  1280
-# define WIN_H	720
+# define WIN_W  800
+# define WIN_H	800
 
 # define TRUE	1
 # define FALSE	0

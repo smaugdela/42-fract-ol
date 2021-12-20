@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 16:27:37 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/20 15:08:40 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/20 17:56:18 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,10 @@ static t_fractal	init_fractal(t_image *image, void *draw_ft)
 	t_fractal	fractal;
 	t_complex	z;
 
-	fractal.max_re = 1.5;
-	fractal.min_re = -3;
-	fractal.max_im = 1.5;
-	fractal.min_im = -1.5;
+	fractal.max_re = 2;
+	fractal.min_re = -2;
+	fractal.max_im = 2;
+	fractal.min_im = -2;
 	fractal.details_iter = MAX_ITER;
 	z.re = 0.0;
 	z.im = 0.0;

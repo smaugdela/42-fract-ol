@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 14:49:37 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/20 17:00:05 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/20 19:16:31 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	cam_right(t_image *image, float step)
 	int y;
 	int	stepix;
 
-	stepix = round(step * WIN_W / (image->fractal.max_re - image->fractal.min_re));
+	stepix = step * WIN_W / (image->fractal.max_re - image->fractal.min_re);
 	x = 0;
 	while (x + stepix <= WIN_W)
 	{
@@ -44,7 +44,7 @@ void	cam_left(t_image *image, float step)
 	int y;
 	int	stepix;
 
-	stepix = round(step * WIN_W / (image->fractal.max_re - image->fractal.min_re));
+	stepix = step * WIN_W / (image->fractal.max_re - image->fractal.min_re);
 	x = WIN_W;
 	while (x - stepix >= 0)
 	{
@@ -70,7 +70,7 @@ void	cam_up(t_image *image, float step)
 	int y;
 	int	stepix;
 
-	stepix = round(step * WIN_H / (image->fractal.max_re - image->fractal.min_re));
+	stepix = step * WIN_H / (image->fractal.max_im - image->fractal.min_im);
 	x = 0;
 	while (x <= WIN_W)
 	{
@@ -96,7 +96,7 @@ void	cam_down(t_image *image, float step)
 	int y;
 	int	stepix;
 
-	stepix = round(step * WIN_H / (image->fractal.max_re - image->fractal.min_re));
+	stepix = step * WIN_H / (image->fractal.max_im - image->fractal.min_im);
 	x = 0;
 	while (x <= WIN_W)
 	{
