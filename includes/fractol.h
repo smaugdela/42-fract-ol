@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 15:24:29 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/20 15:08:02 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/20 16:59:21 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,10 @@ int			pointer_handler(int x, int y, t_image *image);
 int			button_handler(int button, int x, int y, t_image *image);
 int			button_rev_handler(int button, int x, int y, t_image *image);
 int			red_cross_handler(t_image *image);
+void		cam_right(t_image *image, float step);
+void		cam_left(t_image *image, float step);
+void		cam_up(t_image *image, float step);
+void		cam_down(t_image *image, float step);
 
 /* Drawing functions */
 int			draw_pixel(t_image *image, int x, int y, int color);

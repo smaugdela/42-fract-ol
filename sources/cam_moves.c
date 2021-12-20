@@ -6,116 +6,112 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 14:49:37 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/20 15:26:17 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/20 17:00:05 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	cam_right(t_image *image)
+void	cam_right(t_image *image, float step)
 {
 	int x;
 	int y;
-	int	step;
+	int	stepix;
 
-	step = 5;
-	if (WIN_W > 100)
-		step *= WIN_W / 100;
+	stepix = round(step * WIN_W / (image->fractal.max_re - image->fractal.min_re));
 	x = 0;
-	while (x + step <= WIN_W)
+	while (x + stepix <= WIN_W)
 	{
 		y = 0;
 		while (y <= WIN_H)
 		{
-			draw_pixel(image, x, y, get_pixel_color(x + step, y, image));
+			draw_pixel(image, x, y, get_pixel_color(x + stepix, y, image));
 			++y;
 		}
 		++x;
 	}
-	image->fractal.max_re += step
-		* (image->fractal.max_re - image->fractal.min_re) / WIN_W;
-	image->fractal.min_re += step
-		* (image->fractal.max_re - image->fractal.min_re) / WIN_W;
-	image->fractal.draw_ft(image->fractal, x, 0, WIN_W, WIN_H);
+	image->fractal.max_re += step;
+	image->fractal.min_re += step;
+	image->fractal.draw_ft(image->fractal, x - 1, 0, WIN_W, WIN_H);
+	mlx_put_image_to_window(image->display->mlx_ptr,
+			image->display->win_ptr, image->image_ptr, 0, 0);
+	draw_ui(image, FALSE);
 }
 
-void	cam_left(t_image *image)
+void	cam_left(t_image *image, float step)
 {
 	int x;
 	int y;
-	int	step;
+	int	stepix;
 
-	step = 5;
-	if (WIN_W > 100)
-		step *= WIN_W / 100;
+	stepix = round(step * WIN_W / (image->fractal.max_re - image->fractal.min_re));
 	x = WIN_W;
-	while (x - step >= 0)
+	while (x - stepix >= 0)
 	{
 		y = 0;
 		while (y <= WIN_H)
 		{
-			draw_pixel(image, x, y, get_pixel_color(x - step, y, image));
+			draw_pixel(image, x, y, get_pixel_color(x - stepix, y, image));
 			++y;
 		}
 		--x;
 	}
-	image->fractal.max_re += step
-		* (image->fractal.max_re - image->fractal.min_re) / WIN_W;
-	image->fractal.min_re += step
-		* (image->fractal.max_re - image->fractal.min_re) / WIN_W;
-	image->fractal.draw_ft(image->fractal, 0, 0, x, WIN_H);
+	image->fractal.max_re -= step;
+	image->fractal.min_re -= step;
+	image->fractal.draw_ft(image->fractal, 0, 0, x + 1, WIN_H);
+	mlx_put_image_to_window(image->display->mlx_ptr,
+			image->display->win_ptr, image->image_ptr, 0, 0);
+	draw_ui(image, FALSE);
 }
 
-void	cam_up(t_image *image)
+void	cam_up(t_image *image, float step)
 {
 	int x;
 	int y;
-	int	step;
+	int	stepix;
 
-	step = 5;
-	if (WIN_H > 100)
-		step *= WIN_H / 100;
+	stepix = round(step * WIN_H / (image->fractal.max_re - image->fractal.min_re));
 	x = 0;
 	while (x <= WIN_W)
 	{
 		y = WIN_H;
-		while (y - step >= 0)
+		while (y - stepix >= 0)
 		{
-			draw_pixel(image, x, y, get_pixel_color(x, y - step, image));
-			++y;
+			draw_pixel(image, x, y, get_pixel_color(x, y - stepix, image));
+			--y;
 		}
 		++x;
 	}
-	image->fractal.max_re += step
-		* (image->fractal.max_re - image->fractal.min_re) / WIN_W;
-	image->fractal.min_re += step
-		* (image->fractal.max_re - image->fractal.min_re) / WIN_W;
-	image->fractal.draw_ft(image->fractal, x, 0, WIN_W, y);
+	image->fractal.max_im += step;
+	image->fractal.min_im += step;
+	image->fractal.draw_ft(image->fractal, x, 0, WIN_W, y + 1);
+	mlx_put_image_to_window(image->display->mlx_ptr,
+			image->display->win_ptr, image->image_ptr, 0, 0);
+	draw_ui(image, FALSE);
 }
 
-void	cam_down(t_image *image)
+void	cam_down(t_image *image, float step)
 {
 	int x;
 	int y;
-	int	step;
+	int	stepix;
 
-	step = 5;
-	if (WIN_H > 100)
-		step *= WIN_H / 100;
+	stepix = round(step * WIN_H / (image->fractal.max_re - image->fractal.min_re));
 	x = 0;
 	while (x <= WIN_W)
 	{
 		y = 0;
-		while (y + step <= WIN_H)
+		while (y + stepix <= WIN_H)
 		{
-			draw_pixel(image, x, y, get_pixel_color(x, y + step, image));
+			draw_pixel(image, x, y, get_pixel_color(x, y + stepix, image));
 			++y;
 		}
 		++x;
 	}
-	image->fractal.max_re += step
-		* (image->fractal.max_re - image->fractal.min_re) / WIN_W;
-	image->fractal.min_re += step
-		* (image->fractal.max_re - image->fractal.min_re) / WIN_W;
-	image->fractal.draw_ft(image->fractal, x, y, WIN_W, WIN_H);
+	image->fractal.max_im -= step;
+	image->fractal.min_im -= step;
+	image->fractal.draw_ft(image->fractal, x, y - 1, WIN_W, WIN_H);
+	mlx_put_image_to_window(image->display->mlx_ptr,
+			image->display->win_ptr, image->image_ptr, 0, 0);
+	draw_ui(image, FALSE);
 }
