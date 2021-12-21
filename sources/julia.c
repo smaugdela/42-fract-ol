@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 18:12:02 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/21 16:32:03 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/21 18:07:32 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	ft_julia(t_complex c, t_complex param, int max_iter)
 		c.re = tmp;
 	}
 	if (n == max_iter)
-		return (-1);
+		return (0);
 	else
 		return (n);
 }
@@ -51,7 +51,7 @@ void	draw_julia(t_fractal para, int xmin, int ymin, int xmax, int ymax)
 			if (n == -1)
 				draw_pixel(para.image, x, y, 0);
 			else
-				draw_pixel(para.image, x, y, color_multi(n, para.details_iter));
+				draw_pixel(para.image, x, y, blue_multi(n, para.details_iter));
 		}
 	}
 }

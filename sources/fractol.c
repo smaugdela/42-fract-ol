@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 16:27:37 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/21 14:16:43 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/21 16:45:59 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,9 @@ static void	*check_args(int argc, char *set)
 		++i;
 		available_sets = fract_sets(&ft, i);
 	}
-	ft_putstr_fd("Usage: ./fractol <name of fractal set>\n", 1);
-	ft_putstr_fd("List of available sets:\n - Mandelbrot\n - Julia\n", 1);
+	ft_putstr_fd("Usage: ./fractol <name of fractal set> <color mode>\n", 1);
+	ft_putstr_fd("List of sets:\n - Mandelbrot\n - Julia\n", 1);
+	ft_putstr_fd("Color Modes\n - monochrome red, green or red: R/G/B\n - light spectrum: S\n", 1);
 	exit (42);
 }
 

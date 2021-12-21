@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:49:19 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/21 16:18:49 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/21 18:08:18 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,14 @@ int color_multi(int n, int max_iter)
 	}
 	return (R * 0x010000 + G * 0x000100 + B);
 }
-/*
-int	revert_color(int color)
-{
-	uint8_t	color_bytes[4];
 
-	color_bytes[0] = (uint8_t)255;
-	color_bytes[1] = (uint8_t)((127.5 + (uint8_t)(color >> 16)) % 255);
-	color_bytes[2] = (uint8_t)((127.5 + (uint8_t)(color >> 8)) % 255);
-	color_bytes[3] = (uint8_t)((127.5 + (uint8_t)(color)) % 255);
-	color = 0;
-	color = color | color_bytes[0] << 24;
-	color = color | color_bytes[1] << 16;
-	color = color | color_bytes[2] << 8;
-	color = color | color_bytes[3];
-	return (color);
+int blue_multi(int n, int max_iter)
+{
+	int		B;
+	float	x;
+
+	B = 0;
+	x = (float)n / (float)max_iter;
+	B = 510 * x - 255;
+	return (0.5 * B * 0x010000 + 0.5 * B * 0x000100 + B);
 }
-*/
