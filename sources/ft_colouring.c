@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:49:19 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/20 19:01:52 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/21 16:18:49 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,32 @@ int	color_monochrome(int n, char color)
 	else if (color == 'B')
 		return ((0x000000ff * n / MAX_ITER) & 0x000000ff);
 	/* Only primary colors are working, not composed ones as below. */
-	else if (color == 'C')
-		return ((0x0000ffff * n / MAX_ITER) & 0x0000ffff);
-	else if (color == 'M')
-		return ((0x00ff00ff * n / MAX_ITER) & 0x00ff00ff);
-	else if (color == 'Y')
-		return ((0x00ffff00 * n / MAX_ITER) & 0x00ffff00);
 	else
 		return ((0x00ffffff * n / MAX_ITER) & 0x00ffffff);
+}
+
+int color_multi(int n, int max_iter)
+{
+	int		R;
+	int		G;
+	int		B;
+	float	x;
+
+	R = 0;
+	G = 0;
+	B = 0;
+	x = (float)n / (float)max_iter;
+	if (x >= 0 && x <= 0.5)
+	{
+		R = -510 * x - 255;
+		G = 510 * x;
+	}
+	else if (x > 0.5 && x <= 1)
+	{
+		G = -510 * x + 510;
+		B = 510 * x - 255;
+	}
+	return (R * 0x010000 + G * 0x000100 + B);
 }
 /*
 int	revert_color(int color)

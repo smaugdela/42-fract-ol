@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 18:12:02 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/21 14:01:05 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/21 16:32:03 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ static int	ft_julia(t_complex c, t_complex param, int max_iter)
 	float		tmp;
 
 	n = 0;
-	while (pow(param.re, 2) + pow(param.im, 2) < 4 && ++n < max_iter)
+	while (pow(c.re, 2) + pow(c.im, 2) < 4 && ++n < max_iter)
 	{
-		tmp = pow(param.re, 2) - pow(param.im, 2) + c.re;
-		param.im = 2 * param.re * param.im + c.im;
-		param.re = tmp;
+		tmp = pow(c.re, 2) - pow(c.im, 2) + param.re;
+		c.im = 2 * c.re * c.im + param.im;
+		c.re = tmp;
 	}
 	if (n == max_iter)
 		return (-1);
@@ -51,7 +51,7 @@ void	draw_julia(t_fractal para, int xmin, int ymin, int xmax, int ymax)
 			if (n == -1)
 				draw_pixel(para.image, x, y, 0);
 			else
-				draw_pixel(para.image, x, y, color_monochrome(n, 'B'));
+				draw_pixel(para.image, x, y, color_multi(n, para.details_iter));
 		}
 	}
 }

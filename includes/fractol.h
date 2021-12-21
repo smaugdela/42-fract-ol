@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 15:24:29 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/21 14:12:25 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/21 16:18:38 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,17 +106,18 @@ void		cam_up(t_image *image, float step);
 void		cam_down(t_image *image, float step);
 
 /* Drawing functions */
-int			draw_pixel(t_image *image, int x, int y, int color);
+void		draw_pixel(t_image *image, int x, int y, int color);
 int			clear_window(t_image *image, int color);
 t_circle	*build_circle(int coord[2], double r, int color, t_bool bord);
 void		draw_circle(t_image *image, t_circle *circle);
 t_rectangle	*build_rectangle(int coord[2], int dim[2], int color, t_bool bord);
 void		draw_rectangle(t_image *image, t_rectangle *rectangle);
-void		draw_ui(t_image *image, t_bool display_ui);
+void		draw_ui(t_image *image);
 
 /* Colouring functions */
 int			get_pixel_color(int x, int y, t_image *image);
 int			color_monochrome(int n, char color);
+int 		color_multi(int n, int max_iter);
 int			revert_color(int color);
 
 /* Fractals definitions */

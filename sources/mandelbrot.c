@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 16:13:59 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/21 14:00:32 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/21 16:19:26 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	draw_mandelbrot(t_fractal para, int xmin, int ymin, int xmax, int ymax)
 			if (n == -1)
 				draw_pixel(para.image, x, y, 0);
 			else
-				draw_pixel(para.image, x, y, color_monochrome(n, 'R'));
+				draw_pixel(para.image, x, y, color_multi(n, para.details_iter));
 		}
 		--y;
 	}

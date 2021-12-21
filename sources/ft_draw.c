@@ -6,21 +6,23 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 12:56:01 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/21 12:43:13 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/21 15:53:05 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	draw_pixel(t_image *image, int x, int y, int color)
+void	draw_pixel(t_image *image, int x, int y, int color)
 {
 	char	*pixel;
 	int		i;
 
 	if (x > WIN_W || x < 0 || y > WIN_H || y < 0)
-		return (42);
+	{
+		ft_putstr_fd("\033[1;31mAccessing unmapped pixel.\033[0m\n", 2);
+		return ;
+	}
 	pixel = image->addr + (y * image->size_line + x * (image->bpp / 8));
-	color = mlx_get_color_value(image->display->mlx_ptr, color);
 	i = image->bpp;
 	while (i >= 8)
 	{
@@ -31,7 +33,6 @@ int	draw_pixel(t_image *image, int x, int y, int color)
 			*pixel = (color >> (image->bpp - i - 8)) & 255;
 		++pixel;
 	}
-	return (0);
 }
 
 int	clear_window(t_image *image, int color)
@@ -54,36 +55,26 @@ int	clear_window(t_image *image, int color)
 	return (0);
 }
 
-void	draw_ui(t_image *image, t_bool display_ui)
+void	draw_ui(t_image *image)
 {
-	t_image hud;
 	int		coord[2];
 	int		dim[2];
 
-	if (display_ui)
-	{
-		hud = *image;
-		coord[0] = WIN_W / 3 + 30;
-		coord[1] = WIN_H / 3;
-		dim[0] = 200;
-		dim[1] = 100;
-		draw_rectangle(&hud, build_rectangle(coord, dim, 0x303030, FALSE));
-		mlx_put_image_to_window(image->display->mlx_ptr,
-			image->display->win_ptr, hud.image_ptr, 0, 0);
-		mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
-			WIN_W / 2 - 30, coord[1] + 20, 0xaa00ff, "Commands:");
-		mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
-			WIN_W / 2 - 70, coord[1] + 40, 0x00ffaa, "Move: arrows keys");
-		mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
-			WIN_W / 2 - 70, coord[1] + 60, 0x00ffaa, "Zoom: scroll wheel");
-		mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
-			WIN_W / 2 - 70, coord[1] + 80, 0x00ffaa, "Details: plus/minus keys");
-	}
-	else
-	{
-		mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
-			15, 20, 0x00ffffff, "H for help");
-	}
+	coord[0] = WIN_W / 3 + 30;
+	coord[1] = WIN_H / 3;
+	dim[0] = 200;
+	dim[1] = 100;
+	draw_rectangle(image, build_rectangle(coord, dim, 0x303030, FALSE));
+	mlx_put_image_to_window(image->display->mlx_ptr,
+		image->display->win_ptr, image->image_ptr, 0, 0);
+	mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
+		WIN_W / 2 - 30, coord[1] + 20, 0xaa00ff, "Commands:");
+	mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
+		WIN_W / 2 - 70, coord[1] + 40, 0x00ffaa, "Move: arrows keys");
+	mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
+		WIN_W / 2 - 70, coord[1] + 60, 0x00ffaa, "Zoom: scroll wheel");
+	mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
+		WIN_W / 2 - 70, coord[1] + 80, 0x00ffaa, "Details: plus/minus keys");
 }
 
 t_circle	*build_circle(int coord[2], double r, int color, t_bool bord)

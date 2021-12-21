@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 14:49:37 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/21 12:14:19 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/21 15:29:47 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ void	cam_right(t_image *image, float step)
 	image->fractal.min_re += step;
 	image->fractal.draw_ft(image->fractal, x - 1, 0, WIN_W, WIN_H);
 	mlx_put_image_to_window(image->display->mlx_ptr,
-			image->display->win_ptr, image->image_ptr, 0, 0);
-	draw_ui(image, FALSE);
+		image->display->win_ptr, image->image_ptr, 0, 0);
+	mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
+		15, 20, 0x00ffffff, "H for help");
 }
 
 void	cam_left(t_image *image, float step)
@@ -60,8 +61,9 @@ void	cam_left(t_image *image, float step)
 	image->fractal.min_re -= step;
 	image->fractal.draw_ft(image->fractal, 0, 0, x + 1, WIN_H);
 	mlx_put_image_to_window(image->display->mlx_ptr,
-			image->display->win_ptr, image->image_ptr, 0, 0);
-	draw_ui(image, FALSE);
+		image->display->win_ptr, image->image_ptr, 0, 0);
+	mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
+		15, 20, 0x00ffffff, "H for help");
 }
 
 void	cam_up(t_image *image, float step)
@@ -86,8 +88,9 @@ void	cam_up(t_image *image, float step)
 	image->fractal.min_im += step;
 	image->fractal.draw_ft(image->fractal, 0, 0, WIN_W, y + 1);
 	mlx_put_image_to_window(image->display->mlx_ptr,
-			image->display->win_ptr, image->image_ptr, 0, 0);
-	draw_ui(image, FALSE);
+		image->display->win_ptr, image->image_ptr, 0, 0);
+	mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
+		15, 20, 0x00ffffff, "H for help");
 }
 
 void	cam_down(t_image *image, float step)
@@ -112,6 +115,7 @@ void	cam_down(t_image *image, float step)
 	image->fractal.min_im -= step;
 	image->fractal.draw_ft(image->fractal, 0, y - 1, WIN_W, WIN_H);
 	mlx_put_image_to_window(image->display->mlx_ptr,
-			image->display->win_ptr, image->image_ptr, 0, 0);
-	draw_ui(image, FALSE);
+		image->display->win_ptr, image->image_ptr, 0, 0);
+	mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
+		15, 20, 0x00ffffff, "H for help");
 }
