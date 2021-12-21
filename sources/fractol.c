@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 16:27:37 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/20 17:56:18 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/21 11:38:57 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,6 @@ int	main(int argc, char **argv)
 	init_events(display, image);
 	mlx_loop(display->mlx_ptr);
 	free_n_destroy(image, display);
-	ft_putstr_fd("\nStopping...\nThanks for using fract'ol!\n", 1);
+	ft_putstr_fd("\nStopping...\n\033[0;32mThanks for using fract'ol!\n", 1);
 	return (0);
 }

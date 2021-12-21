@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 12:56:01 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/20 19:01:55 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/21 12:43:13 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,28 @@ int	clear_window(t_image *image, int color)
 
 void	draw_ui(t_image *image, t_bool display_ui)
 {
+	t_image hud;
+	int		coord[2];
+	int		dim[2];
+
 	if (display_ui)
 	{
+		hud = *image;
+		coord[0] = WIN_W / 3 + 30;
+		coord[1] = WIN_H / 3;
+		dim[0] = 200;
+		dim[1] = 100;
+		draw_rectangle(&hud, build_rectangle(coord, dim, 0x303030, FALSE));
+		mlx_put_image_to_window(image->display->mlx_ptr,
+			image->display->win_ptr, hud.image_ptr, 0, 0);
 		mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
-			WIN_W / 2, WIN_H / 2, 0x00aa00ff, "Here's the help: RTFM");
+			WIN_W / 2 - 30, coord[1] + 20, 0xaa00ff, "Commands:");
+		mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
+			WIN_W / 2 - 70, coord[1] + 40, 0x00ffaa, "Move: arrows keys");
+		mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
+			WIN_W / 2 - 70, coord[1] + 60, 0x00ffaa, "Zoom: scroll wheel");
+		mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
+			WIN_W / 2 - 70, coord[1] + 80, 0x00ffaa, "Details: plus/minus keys");
 	}
 	else
 	{
