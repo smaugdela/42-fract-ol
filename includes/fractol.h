@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 15:24:29 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/20 17:55:28 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/21 14:12:25 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,11 +120,18 @@ int			color_monochrome(int n, char color);
 int			revert_color(int color);
 
 /* Fractals definitions */
-void	draw_mandelbrot(t_fractal para, int xmin, int ymin, int xmax, int ymax);
-void		draw_julia(t_fractal fractal);
+void		draw_mandelbrot(t_fractal para, int xmin, int ymin, int xmax, int ymax);
+void		draw_julia(t_fractal para, int xmin, int ymin, int xmax, int ymax);
 
 /* Toolbox */
 float		complex_magnitude(t_complex z);
 int 		max(int a, int b);
+
+/*
+Escape-codes colors
+GREEN \033[0;32m
+RED \033[1;31m
+NC	\033[0m
+*/
 
 #endif

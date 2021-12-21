@@ -6,72 +6,52 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 18:12:02 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/20 16:41:38 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/21 14:01:05 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void	real_axis_sym(t_image *image)
-{
-	int	y;
-	int	y_sym;
-	int	x;
-
-	x = 0;
-	while (x < WIN_W)
-	{
-		y = 0;
-		y_sym = WIN_H;
-		while (y < WIN_H / 2)
-		{
-			draw_pixel(image, x, y_sym, get_pixel_color(x, y, image));
-			++y;
-			--y_sym;
-		}
-		++x;
-	}
-}
-
-static int	ft_julia(t_complex c, t_complex param)
+static int	ft_julia(t_complex c, t_complex param, int max_iter)
 {
 	int			n;
 	float		tmp;
 
 	n = 0;
-	while (pow(param.re, 2) + pow(param.im, 2) < 4 && ++n < MAX_ITER)
+	while (pow(param.re, 2) + pow(param.im, 2) < 4 && ++n < max_iter)
 	{
 		tmp = pow(param.re, 2) - pow(param.im, 2) + c.re;
 		param.im = 2 * param.re * param.im + c.im;
 		param.re = tmp;
 	}
-	if (n == MAX_ITER)
+	if (n == max_iter)
 		return (-1);
 	else
 		return (n);
 }
 
-void	draw_julia(t_fractal params)
+void	draw_julia(t_fractal para, int xmin, int ymin, int xmax, int ymax)
 {
 	t_complex   c;
 	int			x;
 	int			y;
 	int			n;
 
-	x = -1;
-	while (++x < WIN_W)
+	x = xmin - 1;
+	while (++x < WIN_W && x <= xmax)
 	{
-		y = -1;
-		while (++y <= WIN_H)
+		y = ymin - 1;
+		while (++y < WIN_H && y <= ymax)
 		{
-			c.re = (x - (WIN_W / 2)) * ((params.max_re - params.min_re) / WIN_W);
-			c.im = (y - (WIN_H / 2)) * ((params.max_im - params.min_im) / WIN_H);
-			n = ft_julia(c, params.param);
+			c.re = x * ((para.max_re - para.min_re) /
+				(WIN_W)) + para.min_re;
+			c.im = (-1 * y) * ((para.max_im - para.min_im) /
+				(WIN_H)) + para.max_im;
+			n = ft_julia(c, para.param, para.details_iter);
 			if (n == -1)
-				draw_pixel(params.image, x, y, 0);
+				draw_pixel(para.image, x, y, 0);
 			else
-				draw_pixel(params.image, x, y, color_monochrome(n, 'B'));
+				draw_pixel(para.image, x, y, color_monochrome(n, 'B'));
 		}
 	}
-	real_axis_sym(params.image);
 }

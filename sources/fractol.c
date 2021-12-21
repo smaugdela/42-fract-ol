@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 16:27:37 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/21 11:38:57 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/21 14:16:43 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,11 @@ static void	*check_args(int argc, char *set)
 	{
 		if (ft_strncmp(set, available_sets,
 			max(ft_strlen(set), ft_strlen(available_sets))) == 0)
+		{
 			return (ft);
-		available_sets = fract_sets(ft, i);
+		}
 		++i;
+		available_sets = fract_sets(&ft, i);
 	}
 	ft_putstr_fd("Usage: ./fractol <name of fractal set>\n", 1);
 	ft_putstr_fd("List of available sets:\n - Mandelbrot\n - Julia\n", 1);
@@ -104,6 +106,6 @@ int	main(int argc, char **argv)
 	init_events(display, image);
 	mlx_loop(display->mlx_ptr);
 	free_n_destroy(image, display);
-	ft_putstr_fd("\nStopping...\n\033[0;32mThanks for using fract'ol!\n", 1);
+	ft_putstr_fd("Stopping...\n\033[0;32mThanks for using fract'ol!\033[0m\n", 1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:45:38 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/21 11:39:20 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/21 14:16:55 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	keys_handler(int key_sym, t_image *image)
 	if (key_sym == XK_Escape)
 	{
 		free_n_destroy(image, image->display);
-		ft_putstr_fd("\nEscaping...\n\033[0;32mThanks for using fract'ol!\n", 1);
+		ft_putstr_fd("Escaping...\n\033[0;32mThanks for using fract'ol!\033[0m\n", 1);
 		exit(EXIT_SUCCESS);
 	}
 	else if (key_sym == XK_h)
@@ -79,20 +79,15 @@ int	keys_rev_handler(int key_sym, t_image *image)
 
 int	pointer_handler(int x, int y, t_image *image)
 {
-	(void)image;
-	if (x >= 0 && x <= WIN_W && y >= 0 && y <= WIN_H)
+	if (x >= 0 && x < WIN_W && y >= 0 && y < WIN_H)
 	{
-		ft_putstr_fd("Mouse coordinates = (", 1);
-		ft_putnbr_fd(x, 1);
-		ft_putstr_fd(", ", 1);
-		ft_putnbr_fd(y, 1);
-		ft_putstr_fd(")\n", 1);
 		image->fractal.param.re = x
 			* ((image->fractal.max_re - image->fractal.min_re)
 			/ (WIN_W)) + image->fractal.min_re;
 		image->fractal.param.im = (-1 * y)
 			* ((image->fractal.max_im - image->fractal.min_im)
 			/ (WIN_H)) + image->fractal.max_im;
+		image->fractal.render = TRUE;
 	}
 	return (0);
 }
