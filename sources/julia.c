@@ -51,7 +51,7 @@ void	draw_julia(t_fractal para, int xmin, int ymin, int xmax, int ymax)
 			if (n == -1)
 				draw_pixel(para.image, x, y, 0);
 			else
-				draw_pixel(para.image, x, y, blue_multi(n, para.details_iter));
+				draw_pixel(para.image, x, y, color_multi(n, para.details_iter));
 		}
 	}
 }

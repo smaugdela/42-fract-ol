@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 15:24:29 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/21 18:07:22 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/22 11:24:00 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,15 @@ void		draw_ui(t_image *image);
 /* Colouring functions */
 int			get_pixel_color(int x, int y, t_image *image);
 int			color_monochrome(int n, char color);
+int			color_bnw(int n, int max_iter);
+int			color_grayscale(int n, int max_iter);
 int 		color_multi(int n, int max_iter);
-int			blue_multi(int n, int max_iter);
+int 		color_lagoon(int n, int max_iter);
+int 		color_flame(int n, int max_iter);
+int 		color_r(int n, int max_iter);
+int 		color_g(int n, int max_iter);
+int 		color_b(int n, int max_iter);
+
 
 /* Fractals definitions */
 void		draw_mandelbrot(t_fractal para, int xmin, int ymin, int xmax, int ymax);
