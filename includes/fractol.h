@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 15:24:29 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/22 11:24:00 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/22 19:48:25 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define TRUE	1
 # define FALSE	0
 
-# define MAX_ITER	10
+# define MAX_ITER	15
 
 typedef int8_t	t_bool;
 
@@ -44,12 +44,13 @@ typedef	struct s_fractal {
 	float		max_im;
 	float		min_re;
 	float		min_im;
-	int			details_iter;
+	int			max_iter;
 	t_complex	param;
 	t_bool		render;
 	t_bool		display_ui;
 	void		*image;
 	void 		(*draw_ft)(struct s_fractal, int, int, int, int);
+	int			(*color_ft)(int, int);
 }	t_fractal;
 
 /* Data structures for mlx */
@@ -86,8 +87,12 @@ typedef struct s_rectangle {
 	t_bool	border_only;
 }	t_rectangle;
 
-/* Data initialisation and destruction for mlx */
+/* Parsing */
+void		*fract_sets(char *set);
+t_fractal	check_args(int argc, char **argv);
 void		ft_error(const char *ft_name);
+
+/* Data initialisation and destruction for mlx */
 void		free_n_destroy(t_image *image, t_display *display);
 t_image		*init_image(t_display *display);
 t_display	*init_display(char *win_name);
@@ -126,7 +131,6 @@ int 		color_r(int n, int max_iter);
 int 		color_g(int n, int max_iter);
 int 		color_b(int n, int max_iter);
 
-
 /* Fractals definitions */
 void		draw_mandelbrot(t_fractal para, int xmin, int ymin, int xmax, int ymax);
 void		draw_julia(t_fractal para, int xmin, int ymin, int xmax, int ymax);
@@ -134,7 +138,9 @@ void		draw_julia(t_fractal para, int xmin, int ymin, int xmax, int ymax);
 /* Toolbox */
 float		complex_magnitude(t_complex z);
 int 		max(int a, int b);
-int			ft_nblen(int nb);
+t_bool		ft_c_in_charset(char c, char *charset);
+t_bool		ft_is_charset(const char *str, char *charset);
+float		ft_atof(char *str);
 
 /*
 Escape-codes colors

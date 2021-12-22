@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:45:38 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/22 10:59:07 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/22 19:47:02 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,14 @@ int	keys_handler(int key_sym, t_image *image)
 		cam_up(image, 0.1 * (image->fractal.max_im - image->fractal.min_im));
 	else if (key_sym == XK_Down && !image->fractal.display_ui)
 		cam_down(image, 0.1 * (image->fractal.max_im - image->fractal.min_im));
-	else if (key_sym == XK_KP_Add && image->fractal.details_iter < 100)
+	else if (key_sym == XK_KP_Add && image->fractal.max_iter < 100)
 	{
-		image->fractal.details_iter += 4;
+		image->fractal.max_iter += 4;
 		image->fractal.render = TRUE;
 	}
-	else if (key_sym == XK_KP_Subtract && image->fractal.details_iter >= 10)
+	else if (key_sym == XK_KP_Subtract && image->fractal.max_iter >= 10)
 	{
-		image->fractal.details_iter -= 4;
+		image->fractal.max_iter -= 4;
 		image->fractal.render = TRUE;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 11:26:30 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/21 17:56:54 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/22 19:43:15 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,52 @@ int max(int a, int b)
 	return (b);
 }
 
-int	ft_nblen(int nb)
+t_bool	ft_c_in_charset(char c, char *charset)
 {
-	unsigned int	len;
-	unsigned int	tmp_nb;
+	while (*charset)
+	{
+		if (c == *charset)
+			return (TRUE);
+		++charset;
+	}
+	return (FALSE);
+}
 
-	if (nb == 0)
-		return (1);
+t_bool	ft_is_charset(const char *str, char *charset)
+{
+	int	len;
+
 	len = 0;
-	if (nb < 0)
-	{
+	while (ft_c_in_charset(str[len], charset) == TRUE && str[len])
 		++len;
-		tmp_nb = -nb;
-	}
-	else
-		tmp_nb = nb;
-	while (tmp_nb)
+	if (str[len] == '\0')
+		return (TRUE);
+	return (FALSE);
+}
+
+float	ft_atof(char *str)
+{
+	float			result;
+	int				i;
+	int				sign;
+	unsigned int	len;
+
+	i = 0;
+	sign = 1;
+	result = 0.0;
+	if (!ft_is_charset(str, "-+.0123456789") || ft_strlen(str) > 12)
 	{
-		++len;
-		tmp_nb = tmp_nb / 10;
+		ft_putstr_fd("ft_atof: invalid input\n", 2);
+		return (0.0);
 	}
-	return (len);
+	result = (float)ft_atoi(str);
+	while (str[i] && str[i] != '.')
+		++i;
+	if (str[i] == '.' && str[i + 1])
+	{
+		++i;
+		len = ft_strlen(str) - i;
+		result += (float)ft_atoi(str + i) / pow(10, len);
+	}
+	return (result);
 }
