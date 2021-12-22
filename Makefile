@@ -6,7 +6,7 @@
 #    By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 15:00:41 by smagdela          #+#    #+#              #
-#    Updated: 2021/12/22 18:23:43 by smagdela         ###   ########.fr        #
+#    Updated: 2021/12/22 22:24:43 by smagdela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ BONUSOD	=	${BONUSD}objects/
 LIBFT	:=	${addprefix ${LIBFTD},libft.a}
 MLX		:=	${addprefix ${MLXD},libmlx_Linux.a}
 LIBS	:=	${LIBFT} ${MLX}
-SRCS	=	fractol.c parsing.c ft_utils.c ft_data.c ft_draw.c ft_draw_2.c ft_colouring.c ft_colouring_2.c ft_events.c ft_events_2.c mandelbrot.c julia.c cam_moves.c
+SRCS	=	fractol.c parsing.c ft_utils.c ft_data.c ft_draw.c ft_draw_2.c ft_colouring.c ft_colouring_2.c ft_events.c ft_events_2.c mandelbrot.c julia.c cam_moves.c zooms.c
 BONUS 	=	
 OBJS	:=	${addprefix ${OBJD},${SRCS:.c=.o}}
 DEPS	:=	${addprefix ${OBJD},${SRCS:.c=.d}}

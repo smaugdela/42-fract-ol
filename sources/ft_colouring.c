@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:49:19 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/22 18:22:14 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/22 22:56:28 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,29 +26,29 @@ int	color_bnw(int n, int max_iter)
 {
 	(void)n;
 	(void)max_iter;
-	return(0xffffff);
+	return (0xffffff);
 }
 
-int color_r(int n, int max_iter)
+int	color_r(int n, int max_iter)
 {
-	int	R;
+	int	r;
 
-	R = -255 * ((float)n / (float)max_iter) + 255;
-	return (0x010000 * R);
+	r = -255 * ((float)n / (float)max_iter) + 255;
+	return (0x010000 * r);
 }
 
-int color_g(int n, int max_iter)
+int	color_g(int n, int max_iter)
 {
-	int	G;
+	int	g;
 
-	G = -255 * ((float)n / (float)max_iter) + 255;
-	return (0x000100 * G);
+	g = -255 * ((float)n / (float)max_iter) + 255;
+	return (0x000100 * g);
 }
 
-int color_b(int n, int max_iter)
+int	color_b(int n, int max_iter)
 {
-	int	B;
+	int	b;
 
-	B = -255 * ((float)n / (float)max_iter) + 255;
-	return (B);
+	b = -255 * ((float)n / (float)max_iter) + 255;
+	return (b);
 }

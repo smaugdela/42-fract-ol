@@ -6,16 +6,16 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 14:49:37 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/21 15:29:47 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/22 23:03:13 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	cam_right(t_image *image, float step)
+static void	cam_right(t_image *image, float step)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 	int	stepix;
 
 	stepix = step * WIN_W / (image->fractal.max_re - image->fractal.min_re);
@@ -39,10 +39,10 @@ void	cam_right(t_image *image, float step)
 		15, 20, 0x00ffffff, "H for help");
 }
 
-void	cam_left(t_image *image, float step)
+static void	cam_left(t_image *image, float step)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 	int	stepix;
 
 	stepix = step * WIN_W / (image->fractal.max_re - image->fractal.min_re);
@@ -66,10 +66,10 @@ void	cam_left(t_image *image, float step)
 		15, 20, 0x00ffffff, "H for help");
 }
 
-void	cam_up(t_image *image, float step)
+static void	cam_up(t_image *image, float step)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 	int	stepix;
 
 	stepix = step * WIN_H / (image->fractal.max_im - image->fractal.min_im);
@@ -93,10 +93,10 @@ void	cam_up(t_image *image, float step)
 		15, 20, 0x00ffffff, "H for help");
 }
 
-void	cam_down(t_image *image, float step)
+static void	cam_down(t_image *image, float step)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 	int	stepix;
 
 	stepix = step * WIN_H / (image->fractal.max_im - image->fractal.min_im);
@@ -118,4 +118,18 @@ void	cam_down(t_image *image, float step)
 		image->display->win_ptr, image->image_ptr, 0, 0);
 	mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
 		15, 20, 0x00ffffff, "H for help");
+}
+
+void	cams(t_image *img, int key)
+{
+	if (img->fractal.display_ui == TRUE)
+		return ;
+	else if (key == XK_Right)
+		cam_right(img, 0.1 * (img->fractal.max_re - img->fractal.min_re));
+	else if (key == XK_Left)
+		cam_left(img, 0.1 * (img->fractal.max_re - img->fractal.min_re));
+	else if (key == XK_Up)
+		cam_up(img, 0.1 * (img->fractal.max_im - img->fractal.min_im));
+	else if (key == XK_Down)
+		cam_down(img, 0.1 * (img->fractal.max_im - img->fractal.min_im));
 }

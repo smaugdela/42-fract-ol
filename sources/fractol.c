@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 16:27:37 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/22 19:47:02 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/22 22:18:12 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,8 @@ static void	init_events(t_display *display, t_image *image)
 	mlx_hook(display->win_ptr, DestroyNotify, StructureNotifyMask,
 		&red_cross_handler, image);
 	mlx_hook(display->win_ptr, KeyPress, KeyPressMask, &keys_handler, image);
-	mlx_hook(display->win_ptr, KeyRelease, KeyReleaseMask,
-		&keys_rev_handler, image);
 	mlx_hook(display->win_ptr, ButtonPress, ButtonPressMask,
 		&button_handler, image);
-	mlx_hook(display->win_ptr, ButtonRelease, ButtonReleaseMask,
-		&button_rev_handler, image);
 	mlx_hook(display->win_ptr, MotionNotify, PointerMotionMask,
 		&pointer_handler, image);
 }

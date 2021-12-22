@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 11:26:30 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/22 19:43:15 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/22 22:54:39 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ float	complex_magnitude(t_complex z)
 	return (sqrt(pow(z.re, 2) + pow(z.im, 2)));
 }
 
-int max(int a, int b)
+int	max(int a, int b)
 {
 	if (a > b)
 		return (a);

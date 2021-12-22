@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 15:24:29 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/22 19:48:25 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/22 23:01:10 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_complex {
 	float	im;
 }	t_complex;
 
-typedef	struct s_fractal {
+typedef struct s_fractal {
 	float		max_re;
 	float		max_im;
 	float		min_re;
@@ -100,15 +100,12 @@ t_display	*init_display(char *win_name);
 /* Events handling functions */
 int			loop_handler(t_image *image);
 int			keys_handler(int key_sym, t_image *image);
-int			keys_rev_handler(int key_sym, t_image *image);
 int			pointer_handler(int x, int y, t_image *image);
 int			button_handler(int button, int x, int y, t_image *image);
-int			button_rev_handler(int button, int x, int y, t_image *image);
 int			red_cross_handler(t_image *image);
-void		cam_right(t_image *image, float step);
-void		cam_left(t_image *image, float step);
-void		cam_up(t_image *image, float step);
-void		cam_down(t_image *image, float step);
+void		cams(t_image *img, int key);
+void		zoom_in(t_image *img);
+void		zoom_out(t_image *img);
 
 /* Drawing functions */
 void		draw_pixel(t_image *image, int x, int y, int color);
@@ -132,8 +129,10 @@ int 		color_g(int n, int max_iter);
 int 		color_b(int n, int max_iter);
 
 /* Fractals definitions */
-void		draw_mandelbrot(t_fractal para, int xmin, int ymin, int xmax, int ymax);
-void		draw_julia(t_fractal para, int xmin, int ymin, int xmax, int ymax);
+void		draw_mandelbrot(t_fractal para,
+	int xmin, int ymin, int xmax, int ymax);
+void		draw_julia(t_fractal para,
+	int xmin, int ymin, int xmax, int ymax);
 
 /* Toolbox */
 float		complex_magnitude(t_complex z);
@@ -146,6 +145,7 @@ float		ft_atof(char *str);
 Escape-codes colors
 GREEN \033[0;32m
 RED \033[1;31m
+Magenta \033[0;35m
 NC	\033[0m
 */
 

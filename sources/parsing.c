@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 18:20:38 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/22 19:52:10 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/22 22:50:33 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	*fract_sets(char *set)
 	}
 }
 
-void	*color_sets(char	color)
+void	*color_sets(char color)
 {
 	if (color == 'W' || color == 'w')
 		return (&color_bnw);
@@ -75,6 +75,8 @@ t_fractal	check_args(int argc, char **argv)
 	if (ft_strlen(argv[2]) > 1)
 		usage();
 	fract.color_ft = color_sets(argv[2][0]);
+	fract.param.re = 0.0;
+	fract.param.im = 0.0;
 	if (argc == 5)
 	{
 		fract.param.re = ft_atof(argv[3]);
@@ -82,14 +84,12 @@ t_fractal	check_args(int argc, char **argv)
 		if (fract.param.re > 2 || fract.param.re < -2
 			|| fract.param.im > 2 || fract.param.im < -2)
 			usage();
-		if (fract.param.re == 0 && fract.param.im == 0)
-		{
-			ft_putstr_fd("\nWARNING: Launching with default Julia's", 1);
-			ft_putstr_fd(" parameter as 0 + 0i\n", 1);
-		}
-		else
-			printf("\nLaunching with Julia's parameter as %f %+fi\n",
-				fract.param.re, fract.param.im);
 	}
+	if (fract.param.re == 0 && fract.param.im == 0
+		&& fract.draw_ft == &draw_julia)
+		ft_putstr_fd("\033[0;35mWARNING:\033[0m default ", 1);
+	if (fract.draw_ft == &draw_julia)
+		printf("Julia's parameter = %f%+fi\n",
+			fract.param.re, fract.param.im);
 	return (fract);
 }

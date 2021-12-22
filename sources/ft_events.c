@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:45:38 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/22 19:47:02 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/22 22:57:58 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	loop_handler(t_image *image)
 	return (0);
 }
 
-void reset_ui(t_image *image)
+void	reset_ui(t_image *image)
 {
 	if (image->fractal.display_ui == TRUE)
 	{
@@ -47,21 +47,16 @@ void reset_ui(t_image *image)
 int	keys_handler(int key_sym, t_image *image)
 {
 	if (key_sym == XK_Escape)
-	{
-		free_n_destroy(image, image->display);
-		ft_putstr_fd("Escaping...\n\033[0;32mThanks for using fract'ol!\033[0m\n", 1);
-		exit(EXIT_SUCCESS);
-	}
+		red_cross_handler(image);
 	else if (key_sym == XK_h)
 		reset_ui(image);
-	else if (key_sym == XK_Right && !image->fractal.display_ui)
-		cam_right(image, 0.1 * (image->fractal.max_re - image->fractal.min_re));
-	else if (key_sym == XK_Left && !image->fractal.display_ui)
-		cam_left(image, 0.1 * (image->fractal.max_re - image->fractal.min_re));
-	else if (key_sym == XK_Up && !image->fractal.display_ui)
-		cam_up(image, 0.1 * (image->fractal.max_im - image->fractal.min_im));
-	else if (key_sym == XK_Down && !image->fractal.display_ui)
-		cam_down(image, 0.1 * (image->fractal.max_im - image->fractal.min_im));
+	else if (key_sym == XK_Up || key_sym == XK_Down
+		|| key_sym == XK_Left || key_sym == XK_Right)
+		cams(image, key_sym);
+	else if (key_sym == XK_w)
+		zoom_in(image);
+	else if (key_sym == XK_q)
+		zoom_out(image);
 	else if (key_sym == XK_KP_Add && image->fractal.max_iter < 100)
 	{
 		image->fractal.max_iter += 4;
@@ -75,25 +70,29 @@ int	keys_handler(int key_sym, t_image *image)
 	return (0);
 }
 
-int	keys_rev_handler(int key_sym, t_image *image)
-{
-	(void)image;
-	(void)key_sym;
-	return (0);
-}
-
 int	pointer_handler(int x, int y, t_image *image)
 {
 	if (x >= 0 && x < WIN_W && y >= 0 && y < WIN_H)
 	{
 		image->fractal.param.re = x
 			* ((image->fractal.max_re - image->fractal.min_re)
-			/ (WIN_W)) + image->fractal.min_re;
+				/ (WIN_W)) + image->fractal.min_re;
 		image->fractal.param.im = (-1 * y)
 			* ((image->fractal.max_im - image->fractal.min_im)
-			/ (WIN_H)) + image->fractal.max_im;
+				/ (WIN_H)) + image->fractal.max_im;
 		image->fractal.render = TRUE;
 	}
+	return (0);
+}
+
+int	button_handler(int button, int x, int y, t_image *image)
+{
+	(void)x;
+	(void)y;
+	if (button == 5)
+		zoom_out(image);
+	else if (button == 4)
+		zoom_in(image);
 	return (0);
 }
 /*
@@ -104,34 +103,3 @@ Button value:
 	molette /\ = 4
 	molette \/ = 5
 */
-int button_handler(int button, int x, int y, t_image *image)
-{
-	(void)x;
-	(void)y;
-	if (button == 5)
-	{
-		image->fractal.max_im += 0.2 * (image->fractal.max_im - image->fractal.min_im);
-		image->fractal.min_im -= 0.2 * (image->fractal.max_im - image->fractal.min_im);
-		image->fractal.max_re += 0.2 * (image->fractal.max_re - image->fractal.min_re);
-		image->fractal.min_re -= 0.2 * (image->fractal.max_re - image->fractal.min_re);
-		image->fractal.render = TRUE;
-	}
-	else if (button == 4)
-	{
-		image->fractal.max_im -= 0.2 * (image->fractal.max_im - image->fractal.min_im);
-		image->fractal.min_im += 0.2 * (image->fractal.max_im - image->fractal.min_im);
-		image->fractal.max_re -= 0.2 * (image->fractal.max_re - image->fractal.min_re);
-		image->fractal.min_re += 0.2 * (image->fractal.max_re - image->fractal.min_re);
-		image->fractal.render = TRUE;
-	}
-	return (0);
-}
-
-int	button_rev_handler(int button, int x, int y, t_image *image)
-{
-	(void)x;
-	(void)y;
-	(void)button;
-	(void)image;
-	return (0);
-}
