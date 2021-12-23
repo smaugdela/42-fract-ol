@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 12:56:01 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/22 22:38:14 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/23 20:00:45 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ void	draw_ui(t_image *image)
 	mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
 		WIN_W / 2 - 30, coord[1] + 20, 0xaa00ff, "Commands:");
 	mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
-		WIN_W / 2 - 70, coord[1] + 40, 0x00ffaa, "Move: arrows keys");
+		WIN_W / 2 - 70, coord[1] + 40, 0x00ffaa, "Zoom: scroll wheel or Q/W");
 	mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
-		WIN_W / 2 - 70, coord[1] + 60, 0x00ffaa, "Zoom: scroll wheel or Q/W");
+		WIN_W / 2 - 70, coord[1] + 60, 0x00ffaa, "Details: plus/minus keys");
 	mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
-		WIN_W / 2 - 70, coord[1] + 80, 0x00ffaa, "Details: plus/minus keys");
+		WIN_W / 2 - 70, coord[1] + 80, 0x00ffaa, "Reset: R");
 }
 
 t_circle	*build_circle(int coord[2], double r, int color, t_bool bord)

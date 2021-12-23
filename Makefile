@@ -6,7 +6,7 @@
 #    By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 15:00:41 by smagdela          #+#    #+#              #
-#    Updated: 2021/12/23 14:22:00 by smagdela         ###   ########.fr        #
+#    Updated: 2021/12/23 19:40:14 by smagdela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +29,8 @@ BONUSOD	=	${BONUSD}objects/
 LIBFT	:=	${addprefix ${LIBFTD},libft.a}
 MLX		:=	${addprefix ${MLXD},libmlx_Linux.a}
 LIBS	:=	${LIBFT} ${MLX}
-SRCS	=	fractol.c parsing.c ft_utils.c ft_data.c ft_draw.c ft_draw_2.c ft_colouring.c ft_colouring_2.c ft_events.c ft_events_2.c mandelbrot.c julia.c cam_moves.c zooms.c
-BONUS 	=	fractol_bonus.c parsing_bonus.c ft_utils_bonus.c ft_data_bonus.c ft_draw_bonus.c ft_draw_2_bonus.c ft_colouring_bonus.c ft_colouring_2_bonus.c ft_events_bonus.c ft_events_2_bonus.c mandelbrot_bonus.c julia_bonus.c burning_ship_bonus.c cam_moves_bonus.c zooms_bonus.c
+SRCS	=	fractol.c parsing.c ft_utils.c ft_data.c ft_draw.c ft_draw_2.c ft_colouring.c ft_colouring_2.c ft_events.c ft_events_2.c mandelbrot.c julia.c zooms.c
+BONUS 	=	fractol_bonus.c parsing_bonus.c ft_utils_bonus.c ft_data_bonus.c ft_draw_bonus.c ft_draw_2_bonus.c ft_colouring_bonus.c ft_colouring_2_bonus.c ft_events_bonus.c ft_events_2_bonus.c mandelbrot_bonus.c julia_bonus.c burning_ship_bonus.c multicorn_bonus.c cam_moves_bonus.c zooms_bonus.c
 OBJS	:=	${addprefix ${OBJD},${SRCS:.c=.o}}
 DEPS	:=	${addprefix ${OBJD},${SRCS:.c=.d}}
 SRCS	:=	${addprefix ${SRCD},${SRCS}}

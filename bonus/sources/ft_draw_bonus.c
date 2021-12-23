@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 12:56:01 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/23 13:42:40 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/23 20:06:57 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	draw_ui(t_image *image)
 	coord[0] = WIN_W / 3 + 30;
 	coord[1] = WIN_H / 3;
 	dim[0] = 200;
-	dim[1] = 100;
+	dim[1] = 120;
 	draw_rectangle(image, build_rectangle(coord, dim, 0x303030, FALSE));
 	mlx_put_image_to_window(image->display->mlx_ptr,
 		image->display->win_ptr, image->image_ptr, 0, 0);
@@ -75,6 +75,8 @@ void	draw_ui(t_image *image)
 		WIN_W / 2 - 70, coord[1] + 60, 0x00ffaa, "Zoom: scroll wheel or Q/W");
 	mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
 		WIN_W / 2 - 70, coord[1] + 80, 0x00ffaa, "Details: plus/minus keys");
+	mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
+		WIN_W / 2 - 70, coord[1] + 100, 0x00ffaa, "Reset: R");
 }
 
 t_circle	*build_circle(int coord[2], double r, int color, t_bool bord)

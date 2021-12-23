@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 15:24:29 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/23 14:18:11 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/23 20:05:14 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ int			red_cross_handler(t_image *image);
 void		cams(t_image *img, int key);
 void		zoom_in(t_image *img);
 void		zoom_out(t_image *img);
+void		reset(t_image *image);
 
 /* Drawing functions */
 void		draw_pixel(t_image *image, int x, int y, int color);
@@ -132,6 +133,7 @@ int			color_b(int n, int max_iter);
 void		draw_mandelbrot(t_fractal para, int *xrange, int *yrange);
 void		draw_julia(t_fractal para, int *xrange, int *yrange);
 void		draw_ship(t_fractal para, int *xrange, int *yrange);
+void		draw_multicorn(t_fractal para, int xrange[2], int yrange[2]);
 
 /* Toolbox */
 double		complex_magnitude(t_complex z);

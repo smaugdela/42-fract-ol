@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 15:24:29 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/23 12:54:10 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/23 19:59:27 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,9 @@ int			keys_handler(int key_sym, t_image *image);
 int			pointer_handler(int x, int y, t_image *image);
 int			button_handler(int button, int x, int y, t_image *image);
 int			red_cross_handler(t_image *image);
-void		cams(t_image *img, int key);
 void		zoom_in(t_image *img);
 void		zoom_out(t_image *img);
+void		reset(t_image *image);
 
 /* Drawing functions */
 void		draw_pixel(t_image *image, int x, int y, int color);
@@ -121,12 +121,10 @@ int			get_pixel_color(int x, int y, t_image *image);
 int			color_monochrome(int n, char color);
 int			color_bnw(int n, int max_iter);
 int			color_grayscale(int n, int max_iter);
-int			color_multi(int n, int max_iter);
-int			color_lagoon(int n, int max_iter);
-int			color_flame(int n, int max_iter);
 int			color_r(int n, int max_iter);
 int			color_g(int n, int max_iter);
 int			color_b(int n, int max_iter);
+int			color_multi(int n, int max_iter);
 
 /* Fractals definitions */
 void		draw_mandelbrot(t_fractal para, int *xrange, int *yrange);

@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 18:20:38 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/23 14:18:23 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/23 19:29:35 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	usage(void)
 	ft_putstr_fd(" [(optional) real part of Julia's parameter] ", 1);
 	ft_putstr_fd("[(optional) imaginary part of Julia's paramter]\n\n", 1);
 	ft_putstr_fd("List of sets:\n - Mandelbrot\n - Julia\n", 1);
-	ft_putstr_fd(" - Burning_Ship\n\n", 1);
+	ft_putstr_fd(" - Burning_Ship\n - Multicorn\n\n", 1);
 	ft_putstr_fd("Color Modes:\n - BnW or Grayscale: W/S\n - Red, Green ", 1);
 	ft_putstr_fd("or Blue: R/G/B\n - Spectrum, Lagoon or Flame: P/L/F\n\n", 1);
 	ft_putstr_fd("Real and imaginary parts should be formated as doubles.", 1);
@@ -36,6 +36,8 @@ void	*fract_sets(char *set)
 		return (&draw_julia);
 	else if (!ft_strncmp(set, "Burning_Ship", max(ft_strlen(set), 12)))
 		return (&draw_ship);
+	else if (!ft_strncmp(set, "Multicorn", max(ft_strlen(set), 9)))
+		return (&draw_multicorn);
 	else
 	{
 		usage();

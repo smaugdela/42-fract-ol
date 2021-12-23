@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:45:38 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/23 13:42:40 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/23 20:08:29 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	reset_ui(t_image *image)
 		xrange[0] = WIN_W / 3 + 29;
 		xrange[1] = WIN_W / 3 + 230;
 		yrange[0] = WIN_H / 3 + -1;
-		yrange[1] = WIN_H / 3 + 101;
+		yrange[1] = WIN_H / 3 + 121;
 		image->fractal.draw_ft(image->fractal, xrange, yrange);
 		mlx_put_image_to_window(image->display->mlx_ptr,
 			image->display->win_ptr, image->image_ptr, 0, 0);
@@ -66,6 +66,8 @@ int	keys_handler(int key_sym, t_image *image)
 	else if (key_sym == XK_Up || key_sym == XK_Down
 		|| key_sym == XK_Left || key_sym == XK_Right)
 		cams(image, key_sym);
+	else if (key_sym == XK_r)
+		reset(image);
 	else if (key_sym == XK_w)
 		zoom_in(image);
 	else if (key_sym == XK_q)
@@ -85,7 +87,8 @@ int	keys_handler(int key_sym, t_image *image)
 
 int	pointer_handler(int x, int y, t_image *image)
 {
-	if (x >= 0 && x < WIN_W && y >= 0 && y < WIN_H)
+	if (image->fractal.draw_ft == &draw_julia
+		&& x >= 0 && x < WIN_W && y >= 0 && y < WIN_H)
 	{
 		image->fractal.param.re = x
 			* ((image->fractal.max_re - image->fractal.min_re)

@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 18:20:38 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/22 22:50:33 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/23 19:38:04 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	usage(void)
 	ft_putstr_fd("[(optional) imaginary part of Julia's paramter]\n\n", 1);
 	ft_putstr_fd("List of sets:\n - Mandelbrot\n - Julia\n\n", 1);
 	ft_putstr_fd("Color Modes:\n - BnW or Grayscale: W/S\n - Red, Green ", 1);
-	ft_putstr_fd("or Blue: R/G/B\n - Spectrum, Lagoon or Flame: P/L/F\n\n", 1);
+	ft_putstr_fd("or Blue: R/G/B\n - Spectrum: P\n\n", 1);
 	ft_putstr_fd("Real and imaginary parts should be formated as floats.", 1);
 	ft_putstr_fd(" If given, both real and imaginary part should be, not", 1);
 	ft_putstr_fd(" only one. Both should not be above ±2.0.", 1);
@@ -54,10 +54,6 @@ void	*color_sets(char color)
 		return (&color_b);
 	else if (color == 'P' || color == 'p')
 		return (&color_multi);
-	else if (color == 'L' || color == 'l')
-		return (&color_lagoon);
-	else if (color == 'F' || color == 'f')
-		return (&color_flame);
 	else
 	{
 		usage();
