@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cam_moves.c                                        :+:      :+:    :+:   */
+/*   cam_moves_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 14:49:37 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/23 13:23:12 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/23 13:42:47 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "fractol_bonus.h"
 
-static void	cam_right(t_image *image, float step, int xrange[2], int yrange[2])
+static void	cam_right(t_image *image, double step, int xrange[2], int yrange[2])
 {
 	int	stepix;
 	int	x;
@@ -39,7 +39,7 @@ static void	cam_right(t_image *image, float step, int xrange[2], int yrange[2])
 	image->fractal.draw_ft(image->fractal, xrange, yrange);
 }
 
-static void	cam_left(t_image *image, float step, int xrange[2], int yrange[2])
+static void	cam_left(t_image *image, double step, int xrange[2], int yrange[2])
 {
 	int	stepix;
 	int	x;
@@ -66,7 +66,7 @@ static void	cam_left(t_image *image, float step, int xrange[2], int yrange[2])
 	image->fractal.draw_ft(image->fractal, xrange, yrange);
 }
 
-static void	cam_up(t_image *image, float step, int xrange[2], int yrange[2])
+static void	cam_up(t_image *image, double step, int xrange[2], int yrange[2])
 {
 	int	stepix;
 	int	x;
@@ -93,7 +93,7 @@ static void	cam_up(t_image *image, float step, int xrange[2], int yrange[2])
 	image->fractal.draw_ft(image->fractal, xrange, yrange);
 }
 
-static void	cam_down(t_image *image, float step, int xrange[2], int yrange[2])
+static void	cam_down(t_image *image, double step, int xrange[2], int yrange[2])
 {
 	int	stepix;
 	int	x;

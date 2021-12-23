@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_events.c                                        :+:      :+:    :+:   */
+/*   ft_events_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:45:38 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/23 12:52:07 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/23 13:42:40 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "fractol_bonus.h"
 
 int	loop_handler(t_image *image)
 {
@@ -100,12 +100,24 @@ int	pointer_handler(int x, int y, t_image *image)
 
 int	button_handler(int button, int x, int y, t_image *image)
 {
-	(void)x;
-	(void)y;
-	if (button == 5)
-		zoom_out(image);
-	else if (button == 4)
-		zoom_in(image);
+	if (button == 4 || button == 5)
+	{
+		if (x >= 0 && x < WIN_W && y >= 0 && y < WIN_H)
+		{
+			if (x < WIN_W / 2 - 20)
+				cams(image, XK_Left);
+			else if (x > WIN_W / 2 + 20)
+				cams(image, XK_Right);
+			if (y < WIN_H / 2 - 20)
+				cams(image, XK_Up);
+			else if (y > WIN_H / 2 + 20)
+				cams(image, XK_Down);
+		}
+		if (button == 4)
+			zoom_in(image);
+		else
+			zoom_out(image);
+	}
 	return (0);
 }
 /*

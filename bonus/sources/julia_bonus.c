@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   julia_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/14 16:13:59 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/23 12:29:08 by smagdela         ###   ########.fr       */
+/*   Created: 2021/12/15 18:12:02 by smagdela          #+#    #+#             */
+/*   Updated: 2021/12/23 13:51:58 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "fractol_bonus.h"
 
-static int	ft_mandelbrot(t_complex c, int max_iter)
+static int	ft_julia(t_complex c, t_complex param, int max_iter)
 {
 	int			n;
-	float		tmp;
-	t_complex	z;
+	double		tmp;
 
 	n = 0;
-	z.re = 0;
-	z.im = 0;
-	while (pow(z.re, 2) + pow(z.im, 2) < 4 && ++n < max_iter)
+	while (pow(c.re, 2) + pow(c.im, 2) < 4 && ++n < max_iter)
 	{
-		tmp = pow(z.re, 2) - pow(z.im, 2) + c.re;
-		z.im = 2 * z.re * z.im + c.im;
-		z.re = tmp;
+		tmp = pow(c.re, 2) - pow(c.im, 2) + param.re;
+		c.im = 2 * c.re * c.im + param.im;
+		c.re = tmp;
 	}
 	if (n == max_iter)
 		return (-1);
@@ -33,7 +30,7 @@ static int	ft_mandelbrot(t_complex c, int max_iter)
 		return (n);
 }
 
-void	draw_mandelbrot(t_fractal para, int xrange[2], int yrange[2])
+void	draw_julia(t_fractal para, int xrange[2], int yrange[2])
 {
 	t_complex	c;
 	int			x;
@@ -50,12 +47,11 @@ void	draw_mandelbrot(t_fractal para, int xrange[2], int yrange[2])
 					/ (WIN_W)) + para.min_re;
 			c.im = (-1 * y) * ((para.max_im - para.min_im)
 					/ (WIN_H)) + para.max_im;
-			n = ft_mandelbrot(c, para.max_iter);
+			n = ft_julia(c, para.param, para.max_iter);
 			if (n == -1)
 				draw_pixel(para.image, x, y, 0);
 			else
 				draw_pixel(para.image, x, y, para.color_ft(n, para.max_iter));
 		}
-		--y;
 	}
 }

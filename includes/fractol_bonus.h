@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.h                                          :+:      :+:    :+:   */
+/*   fractol_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 15:24:29 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/23 12:54:10 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/23 14:18:11 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRACTOL_H
-# define FRACTOL_H
+#ifndef FRACTOL_BONUS_H
+# define FRACTOL_BONUS_H
 
 # include "libft.h"
 # include "mlx.h"
@@ -35,15 +35,15 @@ typedef int8_t	t_bool;
 
 /* Fractals structures */
 typedef struct s_complex {
-	float	re;
-	float	im;
+	double	re;
+	double	im;
 }	t_complex;
 
 typedef struct s_fractal {
-	float		max_re;
-	float		max_im;
-	float		min_re;
-	float		min_im;
+	double		max_re;
+	double		max_im;
+	double		min_re;
+	double		min_im;
 	int			max_iter;
 	t_complex	param;
 	t_bool		render;
@@ -131,13 +131,14 @@ int			color_b(int n, int max_iter);
 /* Fractals definitions */
 void		draw_mandelbrot(t_fractal para, int *xrange, int *yrange);
 void		draw_julia(t_fractal para, int *xrange, int *yrange);
+void		draw_ship(t_fractal para, int *xrange, int *yrange);
 
 /* Toolbox */
-float		complex_magnitude(t_complex z);
+double		complex_magnitude(t_complex z);
 int			max(int a, int b);
 t_bool		ft_c_in_charset(char c, char *charset);
 t_bool		ft_is_charset(const char *str, char *charset);
-float		ft_atof(char *str);
+double		ft_atof(char *str);
 
 /*
 Escape-codes colors

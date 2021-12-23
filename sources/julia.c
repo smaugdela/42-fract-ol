@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 18:12:02 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/22 23:02:38 by smagdela         ###   ########.fr       */
+/*   Updated: 2021/12/23 12:29:53 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,18 @@ static int	ft_julia(t_complex c, t_complex param, int max_iter)
 		return (n);
 }
 
-void	draw_julia(t_fractal para, int xmin, int ymin, int xmax, int ymax)
+void	draw_julia(t_fractal para, int xrange[2], int yrange[2])
 {
 	t_complex	c;
 	int			x;
 	int			y;
 	int			n;
 
-	x = xmin - 1;
-	while (++x < WIN_W && x <= xmax)
+	x = xrange[0] - 1;
+	while (++x < WIN_W && x <= xrange[1])
 	{
-		y = ymin - 1;
-		while (++y < WIN_H && y <= ymax)
+		y = yrange[0] - 1;
+		while (++y < WIN_H && y <= yrange[1])
 		{
 			c.re = x * ((para.max_re - para.min_re)
 					/ (WIN_W)) + para.min_re;
