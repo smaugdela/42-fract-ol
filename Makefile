@@ -6,7 +6,7 @@
 #    By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 15:00:41 by smagdela          #+#    #+#              #
-#    Updated: 2021/12/23 19:40:14 by smagdela         ###   ########.fr        #
+#    Updated: 2022/01/03 11:54:26 by smagdela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,11 +71,11 @@ ${LIBS}:
 	${LIBSMK} ${LIBFTD} bonus
 	${LIBSMK} ${MLXD} all
 
-bonus: ${LIBS} ${BONUSO}
+bonus:	${NAME}_bonus
+
+${NAME}_bonus : ${LIBS} ${BONUSO}
 	${CC} ${CFLAGS} ${BONUSO} ${MLXFLAGS} ${LIBS} -o ${NAME}_bonus
 	@echo ${WHALE}
-
-${NAME}_bonus:	bonus
 
 ${BONUSOD}%.o:	${BONUSSD}%.c
 	mkdir -p ${BONUSOD}
