@@ -44,3 +44,7 @@ You could also add 2 floats numbers as arguments if you use Julia fractal, as it
 Enjoy!
 
 # Gallery
+![The_Eye_of_Terror.png](misc/The_Eye_of_Terror.png)
+![Cortes](misc/Cortes.png)
+![Mantis](misc/Mantis.png)
+![Mandelbrots_Seahorses](misc/Mandelbrots_Seahorses.png)
