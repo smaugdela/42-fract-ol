@@ -1,5 +1,5 @@
 # 42-fract-ol
-My first graphical project at 42! I must create a fractal displayer program.
+My first graphical project at 42! I must create a simple fractal displayer program.
 
 # Mandatory Instructions
  - You must use the MiniLibX, the 42's library dedicated to graphical software.
