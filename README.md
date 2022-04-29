@@ -2,7 +2,7 @@
 My first graphical project at 42! I must create a fractal displayer program.
 
 # Mandatory Instructions
-You must use the MiniLibX, the 42's library dedicated to graphical software.
+ - You must use the MiniLibX, the 42's library dedicated to graphical software.
  - Global variables are forbidden.
  - Your program must offer the Julia set and the Mandelbrot set.
  - The mouse wheel zooms in and out, almost infinitely (within the limits of the computer). This is the very principle of fractals.
